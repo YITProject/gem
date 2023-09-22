@@ -1,2 +1,3 @@
-# software-engineering
-A software-engineering project
+# gem
+
+GemGames application
