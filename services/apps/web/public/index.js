@@ -1,0 +1,1 @@
+fetch("/api?name=goup").then(res => res.json()).then(data => console.log(data));

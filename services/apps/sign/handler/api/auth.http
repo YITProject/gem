@@ -1,0 +1,1 @@
+GET http://localhost:9527/api/auth?code=6bdf3af3-1b13-4493-9829-1c13b28acbba

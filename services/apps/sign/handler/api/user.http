@@ -1,0 +1,2 @@
+POST http://localhost:9527/api/user
+Authorization: Bearer 55850068-9d09-4567-9975-5899fb5d5abe

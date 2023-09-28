@@ -1,0 +1,3 @@
+### auth
+POST http://localhost:9527/auth
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGI3NWRhMDNiOTdjYjlhMzQ4YWZjNDciLCJlbWFpbCI6ImVAbWEuaWwiLCJleHAiOjE2OTgwMjUzNDUsImlhZCI6MTY5NTQzMzM0NSwiaXNzIjoiMTI3LjAuMC4xIn0.zULNo-k1vOfAl8KdcA5R5Sg1OOjPk5ECJkH4B_xY5tQ

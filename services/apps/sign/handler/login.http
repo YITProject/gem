@@ -1,0 +1,11 @@
+### exist user
+POST http://localhost:9527/login
+Content-Type: application/json
+
+{
+  "email":"e@ma.il",
+  "password": "6216f8a75fd5bb3d5f22b6f9958cdede3fc086c2"
+}
+
+### input invalid
+POST http://localhost:9527/login
