@@ -3,5 +3,12 @@
     {
       "mode": "auto"
     }
-  ]
+  ],
+  "files.autoSave": "afterDelay",
+  "files.exclude": {
+    "**/next-env.d.ts": true,
+    "**/.next": true,
+    "**/node_modules": true,
+    "pnpm-lock.yaml": true,
+  }
 }
