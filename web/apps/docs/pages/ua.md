@@ -22,10 +22,7 @@ In the absence of explicit instructions from the Us, you can use any content of 
 
 ## Disclaimers
 
-We cannot guarantee the absolute correctness of all contents of the website
-We cannot verify the shared content of other users
-We do not guarantee that the network service will meet the user's requirements, that the network service will not be interrupted, or that the timeliness, security, and accuracy of the network service will not be guaranteed
-We do not assume any responsibility for network service interruption or other defects caused by force majeure or reasons beyond our control.
+We cannot guarantee the absolute correctness of all contents of the website We cannot verify the shared content of other users We do not guarantee that the network service will meet the user's requirements, that the network service will not be interrupted, or that the timeliness, security, and accuracy of the network service will not be guaranteed We do not assume any responsibility for network service interruption or other defects caused by force majeure or reasons beyond our control.
 
 ## Agreement modification
 
