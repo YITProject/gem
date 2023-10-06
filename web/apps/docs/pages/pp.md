@@ -8,13 +8,13 @@ Please carefully read and confirm that you fully understand all the rules and ke
 
 This privacy policy helps you understand the following:
 
-* How we collect and use your personal information; 
+- How we collect and use your personal information;
 
-* How we store and protect your personal information; 
+- How we store and protect your personal information;
 
-* How do we share, transfer and publicly disclose your personal information; 
+- How do we share, transfer and publicly disclose your personal information;
 
-* How we use cookies and other tracking technologies; 
+- How we use cookies and other tracking technologies;
 
 ## How we collect and use your personal information
 

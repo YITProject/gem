@@ -16,6 +16,7 @@
   align-items: center;
   border: 2.6px solid rgb(156, 163, 175);
   margin: 1em 1.5em;
+  transition: .3s;
 }
 
 .one:hover {
