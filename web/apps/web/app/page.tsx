@@ -1,7 +1,3 @@
 export default function Page(): JSX.Element {
-  return (
-    <>
-      TODO
-    </>
-  );
+  return <>TODO</>;
 }

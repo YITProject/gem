@@ -19,10 +19,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NavLayout host="Gem Games">
-          {children}
-        </NavLayout>
+        <NavLayout host="Gem Games">{children}</NavLayout>
       </body>
-    </html >
+    </html>
   );
 }
