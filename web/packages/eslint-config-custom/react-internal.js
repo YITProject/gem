@@ -9,7 +9,6 @@ const project = resolve(process.cwd(), "tsconfig.json");
  *
  * This config extends the Vercel Engineering Style Guide.
  * For more information, see https://github.com/vercel/style-guide
- *
  */
 
 module.exports = {
@@ -38,6 +37,9 @@ module.exports = {
     "eslint-comments/require-description": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "treact/jsx-sort-props": "off",
-    "import/no-extraneous-dependencies":"off"
+    "import/no-extraneous-dependencies": "off",
+    "react/function-component-definition": "off",
+    "react/display-name": "off",
+    "react/jsx-no-useless-fragment": "off",
   },
 };
