@@ -9,6 +9,7 @@
     "**/next-env.d.ts": true,
     "**/.next": true,
     "**/node_modules": true,
+    "**/.turbo":true,
     "pnpm-lock.yaml": true,
     "tsconfig.json": true
   },
