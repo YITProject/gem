@@ -1,8 +1,10 @@
 import { type AbstractIntlMessages, NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
-import { type Metadata } from "next";
+
 import "../globals.css";
+import "../godown-global.css"
 import { i18n } from "../../next.config.js";
+import { type Metadata } from "next";
 export const metadata: Metadata = {
   title: "GemGames",
   description: "GemGames Official Site",
