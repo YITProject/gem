@@ -1,0 +1,12 @@
+label-input {
+  margin: 4px;
+}
+base-button span {
+  margin: 4px 8px;
+}
+base-button {
+  border-radius: 4px;
+}
+label-input {
+  --godown-c--input-width: 12em;
+}
