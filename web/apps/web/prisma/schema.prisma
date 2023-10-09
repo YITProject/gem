@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  // 账户id
+  userID      String        @id @default(uuid())
+  // 邮箱
+  email       String        @unique
+  password    String?
+  // 命名空间
+  namespace   String        @unique @default(uuid())
+  // 显示名称
+  displayName String?
+  // 地区
+  location    String        @default("us")
+  // 账户类型
+  type        String        @default("user")
+  // 创建时间
+  createdAt    DateTime      @default(now())
+  // references //
+  UserData    UserData[]
+  AccessToken AccessToken[]
+  Product     Product[]
+  Order       Order[]
+}
+
+model UserData {
+  user   User   @relation(fields: [userID], references: [userID])
+  // 账户id
+  userID String @id
+}
+
+model AccessToken {
+  user      User      @relation(fields: [userID], references: [userID])
+  // 账户id
+  userID    String
+  // 原始令牌
+  token     String    @id @default(uuid())
+  // 创建时间
+  createAt  DateTime  @default(now())
+  // 过期时间
+  expiresAt DateTime?
+}
+
+model Product {
+  user         User           @relation(fields: [author], references: [userID])
+  // 作者id
+  author       String
+  productID    Int            @id @default(autoincrement())
+  // 名称
+  name         String         @unique
+  // 描述
+  summary      String?
+  OrderDetails OrderDetails[]
+}
+
+model Order {
+  // 订单号
+  orderID   Int      @id @default(autoincrement())
+  // 下单时间
+  orderDate DateTime @default(now())
+  user      User     @relation(fields: [userID], references: [userID])
+  // 下单账户
+  userID    String
+  // 非下单账户的收货id
+  toID      String?
+  // 状态
+  status       String
+  OrderDetails OrderDetails[]
+}
+
+model OrderDetails {
+  product   Product @relation(fields: [productID], references: [productID])
+  // 商品号
+  productID Int
+  order     Order   @relation(fields: [orderID], references: [orderID])
+  // 订单号
+  orderID   Int     @id
+  // 数量
+  count     Int     @default(1)
+}
