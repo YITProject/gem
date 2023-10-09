@@ -13,7 +13,6 @@ func main() {
 	engine := goup.New()
 	engine.Use(middleware.Recovery(), middleware.SetCors(middleware.DefaultCors))
 	engine.GET("/", func(request goup.Request, response goup.Response) {
-		panic("p")
 		str := "Hello, World!\n"
 		fmt.Fprint(response.Writer, str)
 		response.Write([]byte(str))
