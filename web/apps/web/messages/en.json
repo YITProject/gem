@@ -1,5 +1,18 @@
 {
   "Index": {
     "title": "Hello world!"
+  },
+  "(sign)": {
+    "login": "Login",
+    "register": "Register",
+    "signup": "Signup",
+    "signout": "Signout",
+    "signin": "Signin",
+    "password": "Password",
+    "email": "Email",
+    "account": "Account",
+    "namespace": "Namespace",
+    "submit": "Submit",
+    "passwordVerify": "Password Verify"
   }
 }
