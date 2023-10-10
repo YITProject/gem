@@ -10,6 +10,7 @@ var Exp = 24 * 30 * time.Hour
 
 type MapClaims jwt.MapClaims
 
+// Get result query from token
 func Get(token *jwt.Token, query string) (any, bool) {
 	claims := token.Claims
 	c := claims.(jwt.MapClaims)
@@ -17,6 +18,16 @@ func Get(token *jwt.Token, query string) (any, bool) {
 	return v, y
 }
 
+// GetMust return result or nil
+func GetMust(token *jwt.Token, query string) any {
+	v, y := Get(token, query)
+	if y {
+		return v
+	}
+	return nil
+}
+
+// GetString must get string assertion result
 func GetString(token *jwt.Token, query string) (string, bool) {
 	v, y := Get(token, query)
 	str, ok := v.(string)
