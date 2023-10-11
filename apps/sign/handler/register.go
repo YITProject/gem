@@ -3,7 +3,7 @@ package handler
 import (
 	"github.com/startracex/goup"
 	"goupapp/apps/sign/database"
-	"goupapp/model"
+	"goupapp/internal/model"
 )
 
 func Register(req goup.Request, res goup.Response) {

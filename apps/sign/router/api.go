@@ -3,7 +3,7 @@ package router
 import (
 	"github.com/startracex/goup"
 	"goupapp/apps/sign/handler/api"
-	"goupapp/middleware"
+	"goupapp/internal/middleware"
 	"net/http"
 )
 

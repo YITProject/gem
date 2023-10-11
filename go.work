@@ -1,7 +1,6 @@
 go 1.21
 
 use (
-	./apps/go
-	./apps/go/apps/sign
-	./apps/go/apps/web
+	.
+	apps/sign
 )

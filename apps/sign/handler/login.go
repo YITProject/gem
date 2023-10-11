@@ -1,11 +1,11 @@
 package handler
 
 import (
+	"github.com/startracex/goup"
 	"goupapp/apps/sign/conf"
 	"goupapp/apps/sign/database"
-	"goupapp/lib/jwt"
-	"goupapp/model"
-	"github.com/startracex/goup"
+	"goupapp/internal/jwt"
+	"goupapp/internal/model"
 )
 
 func Login(req goup.Request, res goup.Response) {

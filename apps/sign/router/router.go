@@ -3,7 +3,7 @@ package router
 import (
 	"github.com/startracex/goup"
 	"goupapp/apps/sign/handler"
-	"goupapp/middleware"
+	"goupapp/internal/middleware"
 )
 
 func Init(engine *goup.Engine) {
