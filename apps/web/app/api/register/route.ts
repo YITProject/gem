@@ -1,21 +1,23 @@
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest} from "next/server";
+import { NextResponse } from "next/server";
+import type { User } from "@prisma/client";
 import db from "../../../db";
 import jwt from "../../../common/jwt";
-import type { User } from "@prisma/client";
-import { UserDataSafeType } from "../../../state";
-type dataType = {
+import type { UserDataSafeType } from "../../../state";
+
+type DataType = {
   email: string;
   namespace: string;
   password: string;
 } & Partial<User>;
 export const POST = async (req: NextRequest) => {
-  const data = (await req.json()) as dataType;
+  const data = (await req.json()) as DataType;
   if (!data.email || !data.namespace || !data.password) {
     return NextResponse.json({
       message: "Illegal field",
     });
   }
-  const findExists: Array<User> = await db.user.findMany({
+  const findExists: User[] = await db.user.findMany({
     where: {
       OR: [{ email: data.email }, { namespace: data.namespace }],
     },

@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useUserState } from "../../../state";
+
 export default function Profile() {
   const loadFromJWT = useUserState((s) => s.loadFromJWT);
   const userData = useUserState((s) => s.data);

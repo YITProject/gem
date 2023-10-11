@@ -1,6 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
-const len = "Bearer ".length;
+import type { NextRequest} from "next/server";
+import { NextResponse } from "next/server";
 import jwt from "../../../common/jwt";
+
+const len = "Bearer ".length;
+
 export const POST = (req: NextRequest) => {
   const { headers } = req;
   let auth = headers.get("Authorization");

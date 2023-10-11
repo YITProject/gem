@@ -3,11 +3,12 @@ import { createRef } from "react";
 import { BaseButton, LabelInput } from "godown/react";
 import { useTranslations } from "next-intl";
 import Form from "ui/form/sign";
-import { testEmail, testNamespace, sha1 } from "../../../../common";
 import type { RefType } from "ui/form/sign";
-import { User } from "@prisma/client";
-import { useUserState } from "../../../../state";
+import type { User } from "@prisma/client";
 import { type Metadata } from "next";
+import { useUserState } from "../../../../state";
+import { testEmail, testNamespace, sha1 } from "../../../../common";
+
 export const metadata: Metadata = {
   title: "Sign up",
 };
@@ -16,15 +17,15 @@ export default function Signup() {
   const t = useTranslations("(sign)");
   const loadFromJWT = useUserState((s) => s.loadFromJWT);
   const submit = () => {
-    if (!ref || !ref.current) {
+    if (!ref.current) {
       return;
     }
     const value = ref.current.value();
-    if (!testEmail(value?.email)) {
+    if (!testEmail(value.email)) {
       // TODO err
       return;
     }
-    if (!testNamespace(value?.namespace)) {
+    if (!testNamespace(value.namespace)) {
       // TODO err
       return;
     }
@@ -35,7 +36,7 @@ export default function Signup() {
     if (value.password) {
       data.password = sha1(value.password);
     }
-    fetch("/api/register", {
+    void fetch("/api/register", {
       method: "post",
       body: JSON.stringify(data),
     })
@@ -43,15 +44,13 @@ export default function Signup() {
       .then((jsondata) => {
         const { token, to } = jsondata;
         if (token) {
-          loadFromJWT(token, true);
+          loadFromJWT(token as string, true);
         }
-        console.log(token);
         window.location.pathname = to || "/";
       });
   };
   return (
-    <>
-      <Form ref={ref}>
+    <Form ref={ref}>
         <LabelInput label={t("email")} name="email" />
         <LabelInput label={t("namespace")} name="namespace" />
         <LabelInput label={t("password")} name="password" />
@@ -66,6 +65,5 @@ export default function Signup() {
           </BaseButton>
         </div>
       </Form>
-    </>
   );
 }

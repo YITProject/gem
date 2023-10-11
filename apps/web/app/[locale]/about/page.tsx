@@ -1,18 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
 import classes from "./about.module.css";
+
 const fetchURL = "https://api.github.com/repos/YITProject/gem/contributors";
-type contributor = {
+interface Contributor {
   login: string;
   avatar_url: string;
   url: string;
-};
+}
 export default function About() {
-  const [contributors, setContributors] = useState<contributor[]>([]);
+  const [contributors, setContributors] = useState<Contributor[]>([]);
   useEffect(() => {
-    fetch(fetchURL)
+    void fetch(fetchURL)
       .then((res) => res.json())
-      .then((data: contributor[]) => {
+      .then((data: Contributor[]) => {
         setContributors(data);
       });
   });
@@ -24,7 +25,7 @@ export default function About() {
         {contributors.map((user) => {
           return (
             <a href={user.url} key={user.login}>
-              <img src={user.avatar_url} alt={user.login} />
+              <img alt={user.login} src={user.avatar_url} />
               <h3>{user.login}</h3>
             </a>
           );

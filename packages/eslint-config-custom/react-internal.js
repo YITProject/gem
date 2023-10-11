@@ -33,13 +33,13 @@ module.exports = {
   ignorePatterns: ["node_modules/", "dist/", ".eslintrc.js"],
 
   rules: {
-    "import/no-default-export": "off",
-    "eslint-comments/require-description": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "treact/jsx-sort-props": "off",
-    "import/no-extraneous-dependencies": "off",
-    "react/function-component-definition": "off",
-    "react/display-name": "off",
-    "react/jsx-no-useless-fragment": "off",
+    // "import/no-default-export": "off",
+    // "eslint-comments/require-description": "off",
+    // "@typescript-eslint/explicit-function-return-type": "off",
+    // "treact/jsx-sort-props": "off",
+    // "import/no-extraneous-dependencies": "off",
+    // "react/function-component-definition": "off",
+    // "react/display-name": "off",
+    // "react/jsx-no-useless-fragment": "off",
   },
 };

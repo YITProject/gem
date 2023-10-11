@@ -1,5 +1,4 @@
 const { resolve } = require("node:path");
-const commonRules = require("./common-rules");
 const project = resolve(process.cwd(), "tsconfig.json");
 
 /*
@@ -8,7 +7,6 @@ const project = resolve(process.cwd(), "tsconfig.json");
  *
  * This config extends the Vercel Engineering Style Guide.
  * For more information, see https://github.com/vercel/style-guide
- *
  */
 
 module.exports = {
@@ -41,6 +39,10 @@ module.exports = {
     "eslint-comments/require-description": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "treact/jsx-sort-props": "off",
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "turbo/no-undeclared-env-vars": "off",
   },
 };

@@ -1,18 +1,19 @@
-import { NextRequest, NextResponse } from "next/server";
+import type { NextRequest} from "next/server";
+import { NextResponse } from "next/server";
+import type { User } from "@prisma/client";
 import db from "../../../db";
 import jwt from "../../../common/jwt";
-import { User } from "@prisma/client";
 import { testEmail } from "../../../common";
-import { UserDataSafeType } from "../../../state";
+import type { UserDataSafeType } from "../../../state";
 
-type dataType = {
+interface DataType {
   email?: string;
   namespace?: string;
   password: string;
-};
+}
 export const POST = async (req: NextRequest) => {
-  const data = (await req.json()) as dataType;
-  let where: dataType;
+  const data = (await req.json()) as DataType;
+  let where: DataType;
   if (data.email && testEmail(data.email)) {
     where = {
       email: data.email,

@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+
 const jwtkey = process.env.JWTKEY!;
 export const defaultSignOption: jwt.SignOptions = {
   expiresIn: "24h",
@@ -9,12 +10,13 @@ export function sign(
     | string
     | Buffer
     | {
-        [key: string]: any;
+        [key: string]: unknown;
         password?: string | null | undefined;
       },
   options?: jwt.SignOptions,
 ): string {
-  if (typeof payload == "object" && "password" in payload) {
+  if (typeof payload === "object" && "password" in payload) {
+    delete payload.password;
   }
   return jwt.sign(payload, jwtkey, options || defaultSignOption);
 }
