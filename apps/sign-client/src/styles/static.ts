@@ -15,6 +15,9 @@ export const staticStyles = css`
   label-input {
     margin: 0.25em 0;
   }
+  link-a {
+    margin-top: .8em;
+  }
   .wrapper {
     display: flex;
     align-items: center;
