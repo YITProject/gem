@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import "../globals.css";
 import "../godown-global.css";
 import { type Metadata } from "next";
-import { i18n } from "../../next.config.js";
+import { i18n } from "../../../next.config.js";
 import RootLayout from "./_base-layout";
 
 export const metadata: Metadata = {

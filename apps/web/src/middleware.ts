@@ -1,5 +1,5 @@
 import createMiddleware from "next-intl/middleware";
-import { i18n } from "./next.config.js";
+import { i18n } from "../next.config.js";
 export default createMiddleware({
   // A list of all locales that are supported
   locales: i18n.locales,
