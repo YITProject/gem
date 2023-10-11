@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "licenses:gen":"generate-license-file --input ./package.json --output public/licenses.txt",
     "db:gen": "prisma generate",
     "db:dev": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
@@ -16,8 +17,8 @@
     "db:test": "node --loader ts-node/esm db/testing.ts"
   },
   "dependencies": {
-    "common": "workspace:*",
     "@prisma/client": "5.4.1",
+    "common": "workspace:*",
     "godown": "^1.1.5",
     "jsonwebtoken": "^9.0.2",
     "next": "^13.4.19",
@@ -33,6 +34,7 @@
     "@types/react": "^18.0.22",
     "@types/react-dom": "^18.0.7",
     "eslint-config-custom": "workspace:*",
+    "generate-license-file": "^2.0.0",
     "next-intl": "^2.20.2",
     "prisma": "^5.4.1",
     "ts-node": "^10.9.1",
