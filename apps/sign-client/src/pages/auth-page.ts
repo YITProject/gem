@@ -29,7 +29,7 @@ export class AuthPage extends LitElement {
         const { code } = data;
         window.location.href = `${this.callbackURL}?code=${code}`;
       })
-      .catch(() => { });
+      .catch(() => {});
   }
   protected firstUpdated() {
     this.token = localStorage.getItem("TOKEN");
@@ -68,17 +68,17 @@ export class AuthPage extends LitElement {
     return html`
       <flex-flow class="wrapper">
         ${this.state
-        ? html`
+          ? html`
               ${this.state.email}
               <span> You're authorizing</span>
               <span style="font-weight: 700;">another application</span>
               <a
                 style="font-style: italic;text-decoration: underline;"
                 href=${ifDefined(
-          this.callbackURLOrigin === null
-            ? undefined
-            : this.callbackURLOrigin,
-        )}
+                  this.callbackURLOrigin === null
+                    ? undefined
+                    : this.callbackURLOrigin,
+                )}
               >
                 ${this.callbackURLOrigin}
               </a>
@@ -89,7 +89,7 @@ export class AuthPage extends LitElement {
               </base-button>
               <link-a href="/login">Change account</link-a>
             `
-        : html` Wait a moment. `}
+          : html` Wait a moment. `}
       </flex-flow>
     `;
   }

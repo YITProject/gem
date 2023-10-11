@@ -51,19 +51,19 @@ export default function Signup() {
   };
   return (
     <Form ref={ref}>
-        <LabelInput label={t("email")} name="email" />
-        <LabelInput label={t("namespace")} name="namespace" />
-        <LabelInput label={t("password")} name="password" />
-        <LabelInput
-          label={t("passwordVerify")}
-          name="passwordVerify"
-          type="password"
-        />
-        <div>
-          <BaseButton onClick={submit}>
-            <span>{t("submit")}</span>
-          </BaseButton>
-        </div>
-      </Form>
+      <LabelInput label={t("email")} name="email" />
+      <LabelInput label={t("namespace")} name="namespace" />
+      <LabelInput label={t("password")} name="password" />
+      <LabelInput
+        label={t("passwordVerify")}
+        name="passwordVerify"
+        type="password"
+      />
+      <div>
+        <BaseButton onClick={submit}>
+          <span>{t("submit")}</span>
+        </BaseButton>
+      </div>
+    </Form>
   );
 }

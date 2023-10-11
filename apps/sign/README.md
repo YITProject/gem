@@ -10,7 +10,7 @@ Return `json web token`
 
 Parameter:
 
- - Body: E-mail, password
+- Body: E-mail, password
 
 ## Register
 
@@ -20,7 +20,7 @@ Register action
 
 Parameter:
 
- - Body: E-mail, password
+- Body: E-mail, password
 
 ## Authorization
 
@@ -30,9 +30,9 @@ Return `authorization code`
 
 Parameter:
 
- - Header:
+- Header:
 
-    - Authorization: `Bearer ${json web token}`
+  - Authorization: `Bearer ${json web token}`
 
 ## Application programming interface
 
@@ -40,8 +40,9 @@ Parameter:
 
 Return `temporary token`
 
-Query: 
-  + code: `authorization code`
+Query:
+
+- code: `authorization code`
 
 `GET /api/user`
 
@@ -49,6 +50,6 @@ Return `user information`
 
 Parameter:
 
- - Header:
+- Header:
 
-    - Token: `${temporary token}` or Authorization: `Bearer ${json web token}`
+  - Token: `${temporary token}` or Authorization: `Bearer ${json web token}`

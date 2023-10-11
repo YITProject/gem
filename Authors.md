@@ -1,3 +1,3 @@
 # Authors
 
-* [STARTRACEX](github.com/startracex)
+- [STARTRACEX](github.com/startracex)

@@ -16,7 +16,7 @@ export const staticStyles = css`
     margin: 0.25em 0;
   }
   link-a {
-    margin-top: .8em;
+    margin-top: 0.8em;
   }
   .wrapper {
     display: flex;

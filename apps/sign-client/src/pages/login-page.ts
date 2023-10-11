@@ -1,5 +1,5 @@
 import { staticStyles } from "../styles/static";
-import origin from "../lib/origin"
+import origin from "../lib/origin";
 import { testEmail, testPassword } from "../lib/vaild";
 import { sha1 } from "../lib/crypto";
 import { BaseForm, RouteView } from "godown";
