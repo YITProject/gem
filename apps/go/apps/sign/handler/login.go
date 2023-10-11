@@ -1,18 +1,17 @@
 package handler
 
 import (
-	"github.com/startracex/goup"
 	"goupapp/apps/sign/conf"
 	"goupapp/apps/sign/database"
 	"goupapp/lib/jwt"
 	"goupapp/model"
+	"github.com/startracex/goup"
 )
 
 func Login(req goup.Request, res goup.Response) {
 	usr, ok := model.BindUserLoginInput(req)
 	if !ok {
 		res.WriteHeader(400)
-
 		return
 	}
 	// Check if exist by email, password
@@ -23,7 +22,6 @@ func Login(req goup.Request, res goup.Response) {
 	//	User does not exist
 	if len(result) == 0 {
 		res.Status(404)
-
 		return
 	}
 	// ok:	User exist
