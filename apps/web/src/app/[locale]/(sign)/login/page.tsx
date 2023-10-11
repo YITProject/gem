@@ -8,7 +8,7 @@ import type { User } from "@prisma/client";
 import { type Metadata } from "next";
 import { useUserState } from "../../../../state";
 import { testEmail, testNamespace, sha1 } from "../../../../common";
-import { SetSubhead } from "../../_base-layout";
+import { SetSubhead } from "../../../../hooks/subhead";
 
 export const metadata: Metadata = {
   title: "Login",
