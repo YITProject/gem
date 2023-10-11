@@ -6,12 +6,17 @@
   ],
   "files.autoSave": "afterDelay",
   "files.exclude": {
+    ".git": true,
+    "**/node_modules": true,
     "**/next-env.d.ts": true,
     "**/.next": true,
-    "**/node_modules": true,
-    "**/.turbo":true,
+    "**/.turbo": true,
     "pnpm-lock.yaml": true,
-    "tsconfig.json": true
+    "tsconfig.json": true,
+    ".npmrc": true,
+    "go.sum": true,
+    "go.work.sum": true,
+    ".idea": true
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
