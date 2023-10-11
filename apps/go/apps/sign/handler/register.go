@@ -47,5 +47,4 @@ func Register(req goup.Request, res goup.Response) {
 		})
 	*/
 	res.Status(200)
-	return
 }

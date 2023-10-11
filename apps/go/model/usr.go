@@ -25,7 +25,7 @@ func (u *UserLogin) CheckPassword() bool {
 
 func BindUserLoginInput(req goup.Request) (*UserLogin, bool) {
 	data := &UserLogin{}
-	err := req.JSON(&data)
+	err := req.JSON(data)
 	if err != nil {
 		return nil, false
 	}
