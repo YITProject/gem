@@ -18,7 +18,6 @@ const init = (set) => {
       }
       const data = decode(token);
       if (data) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         set(() => ({ data }));
       }
       if (autosave) {
