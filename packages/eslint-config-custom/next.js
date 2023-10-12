@@ -47,5 +47,6 @@ module.exports = {
     "@typescript-eslint/no-namespace": "off",
     "react/display-name": "off",
     "react/function-component-definition": "off",
+    "no-param-reassign": "off",
   },
 };
