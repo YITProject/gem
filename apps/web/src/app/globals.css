@@ -49,3 +49,10 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+footer {
+  display: contents;
+  & flex-flow {
+    
+  }
+}
