@@ -1,3 +1,3 @@
 # Authors
 
-- [STARTRACEX](github.com/startracex)
+see `apps/docs/authors.md`
