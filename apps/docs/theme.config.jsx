@@ -1,13 +1,12 @@
 import GemGamesLogo from "ui/logo/gemgames";
 import { useRouter } from "next/router";
 import svg from "ui/logo/gemgames.svg";
+
 export default {
   head: (
-    <>
-      <link rel="shortcut icon" href={svg.src} type="image/svg" />
-    </>
+    <link href={svg.src} rel="shortcut icon" type="image/svg" />
   ),
-  logo: <GemGamesLogo height="36" color="light" />,
+  logo: <GemGamesLogo color="light" height="36" />,
   project: {
     link: "https://github.com/yitproject/gem",
   },
