@@ -2,7 +2,7 @@
 
 GemGames as Us
 
-**Us** (including services provided by products such as websites, hereinafter referred to as "products and services") is developed and operated by **startracex** (hereinafter referred to as "us"). It is our top priority to ensure the data security and privacy protection of users. This privacy policy specifies the data collected when you visit and use our products and services and the way it is handled.
+**Us** (including services provided by products such as websites, hereinafter referred to as "products and services") is developed and operated by **GemGames** (hereinafter referred to as "us"). It is our top priority to ensure the data security and privacy protection of users. This privacy policy specifies the data collected when you visit and use our products and services and the way it is handled.
 
 Please carefully read and confirm that you fully understand all the rules and key points of this privacy policy before continuing to use our products. Once you choose to use it, it is deemed that you agree to all the contents of this privacy policy and agree that we collect and use your relevant information according to it. If you do not agree to the relevant agreement or any of its terms, you should stop using our products and services.
 
