@@ -26,24 +26,22 @@ func main() {
 		Target: &url.URL{
 			Host: "localhost:3000",
 		},
-	})
-
-	r.Add(&reverse.Forward{
-		Form: &url.URL{
-			Host: "docs.example.com",
+	},
+		&reverse.Forward{
+			Form: &url.URL{
+				Host: "docs.example.com",
+			},
+			Target: &url.URL{
+				Host: "localhost:3001",
+			},
 		},
-		Target: &url.URL{
-			Host: "localhost:3001",
-		},
-	})
-	
-	r.Add(&reverse.Forward{
-		Form: &url.URL{
-			Host: "login.example.com",
-		},
-		Target: &url.URL{
-			Host: "localhost:9527",
-		},
-	})
+		&reverse.Forward{
+			Form: &url.URL{
+				Host: "login.example.com",
+			},
+			Target: &url.URL{
+				Host: "localhost:9527",
+			},
+		})
 
 }
