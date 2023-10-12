@@ -12,6 +12,52 @@ GemGames 由多个应用组合而成
 
 - 一个基于 [Goup](https://github.com/startracex/goup) 的 Go 反代服务器
 
+## 起步
+
+### 安装依赖
+
+安装工作区间所有go依赖
+
+```sh
+go mod tidy
+```
+
+安装工作区间所有npm依赖
+
+```sh
+pnpm install
+```
+
+### 启动开发服务器
+
+启动全部开发服务器
+
+```sh
+pnpm run dev
+```
+
+构建go应用程序
+
+```sh
+cd ./apps/sign
+go run main.go
+```
+
+### 为生产环境构建
+
+为所有应用构建
+
+```sh
+pnpm run build
+```
+
+构建go应用程序
+
+```sh
+cd ./apps/sign
+go build main.go
+```
+
 ## 拓展内容
 
 ### 参与者和友情链接
