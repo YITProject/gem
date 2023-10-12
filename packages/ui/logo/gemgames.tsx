@@ -28,16 +28,14 @@ export default function GemGames(props?: GemGamesProps) {
         <style>
           {`
         .gemgames-logo.light path,
-        :root.dark .gemgames-logo.auto path,
         [data-theme="dark"] .gemgames-logo.auto path
         {
-          fill: #ffffff;
+          fill: #ffffff !important;
         }
         .gemgames-logo.dark path,
-        :root.light .gemgames-logo.auto path,
-        [data-theme="light] .gemgames-logo.auto path
+        [data-theme="light"] .gemgames-logo.auto path
         {
-          fill: #000000;
+          fill: #000000 !important;
         }
         `}
         </style>
