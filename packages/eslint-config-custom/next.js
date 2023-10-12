@@ -44,5 +44,8 @@ module.exports = {
     "@typescript-eslint/no-unsafe-member-access": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "turbo/no-undeclared-env-vars": "off",
+    "@typescript-eslint/no-namespace": "off",
+    "react/display-name": "off",
+    "react/function-component-definition": "off",
   },
 };

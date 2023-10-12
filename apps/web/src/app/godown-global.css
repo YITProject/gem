@@ -10,3 +10,6 @@ base-button {
 label-input {
   --godown-c--input-width: 12em;
 }
+* {
+  --godown-c--nav-background: #0c161d;
+}

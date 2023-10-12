@@ -1,6 +1,9 @@
+"use client";
+import { useEffect } from "react";
+
 type ThemeType = "light" | "dark";
 const key = "THEME";
-export function SetTheme(theme?: ThemeType) {
+export function changeTheme(theme?: ThemeType) {
   if (theme) {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem(key, theme);
@@ -8,9 +11,14 @@ export function SetTheme(theme?: ThemeType) {
   }
   const saved = localStorage.getItem(key) as ThemeType | null;
   if (saved) {
-    SetTheme(saved);
+    changeTheme(saved);
     return;
   }
   const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  SetTheme(isDark ? "dark" : "light");
+  changeTheme(isDark ? "dark" : "light");
+}
+export function SetTheme(theme?: ThemeType) {
+  useEffect(() => {
+    changeTheme(theme);
+  }, [theme]);
 }
