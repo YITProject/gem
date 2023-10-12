@@ -4,7 +4,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "fmt": "prettier --write '**/*.{ts,tsx,md}'",
+    "fmt": "prettier --write '**/*.{ts,tsx,md,mdx}'",
     "clean": "turbo daemon clean"
   },
   "devDependencies": {
