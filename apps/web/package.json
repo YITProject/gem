@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "licenses:gen":"generate-license-file --input ./package.json --output public/licenses.txt",
+    "licenses:gen": "generate-license-file --input ./package.json --output public/licenses.txt",
     "db:gen": "prisma generate",
     "db:dev": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
@@ -24,6 +24,7 @@
     "next": "^13.4.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "swr": "^2.2.4",
     "ui": "workspace:*",
     "zustand": "^4.4.3"
   },
