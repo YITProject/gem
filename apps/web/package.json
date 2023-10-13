@@ -14,7 +14,7 @@
     "db:deploy": "prisma migrate deploy",
     "db:reset": "prisma migrate reset",
     "db:studio": "prisma studio",
-    "db:test": "node --loader ts-node/esm db/testing.ts"
+    "db:test": "node --loader ts-node/esm src/db/testing.ts"
   },
   "dependencies": {
     "@prisma/client": "5.4.2",
