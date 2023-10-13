@@ -10,8 +10,8 @@ export default function Profile() {
     if (!userData) {
       loadFromJWT();
     }
-  }, []);
-  if (!userData) return <></>;
+  }, [loadFromJWT, userData]);
+  if (!userData) return null;
   return (
     <>
       <div>{userData.userID}</div>

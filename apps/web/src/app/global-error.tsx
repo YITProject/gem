@@ -7,10 +7,10 @@ export default function GlobalError({
   reset: () => void;
 }) {
   return (
-    <html>
+    <html lang="en">
       <body>
-        {error.digest && <h2>{error.digest}</h2>}
-        <button onClick={() => reset()}>RESET</button>
+        {error.digest ? <h2>{error.digest}</h2> : null}
+        <button onClick={() => { reset(); }}>RESET</button>
       </body>
     </html>
   );

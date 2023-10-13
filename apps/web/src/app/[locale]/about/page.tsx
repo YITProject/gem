@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import classes from "./about.module.css";
 
 const fetchURL = "https://api.github.com/repos/YITProject/gem/contributors";
@@ -25,7 +26,7 @@ export default function About() {
         {contributors.map((user) => {
           return (
             <a href={user.url} key={user.login}>
-              <img alt={user.login} src={user.avatar_url} />
+              <Image alt={user.login} src={user.avatar_url} />
               <h3>{user.login}</h3>
             </a>
           );
