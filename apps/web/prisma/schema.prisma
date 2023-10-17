@@ -20,23 +20,47 @@ model User {
   namespace   String        @unique @default(uuid())
   // 显示名称
   displayName String?
+  avatarURL   String?
   // 地区
   location    String        @default("us")
   // 账户类型
   type        String        @default("user")
   // 创建时间
-  createdAt    DateTime      @default(now())
-  // references //
-  UserData    UserData[]
+  createdAt   DateTime      @default(now())
   AccessToken AccessToken[]
   Product     Product[]
   Order       Order[]
+  Card        Card?
+  Item        Item[]
 }
 
-model UserData {
-  user   User   @relation(fields: [userID], references: [userID])
-  // 账户id
-  userID String @id
+model Item {
+  id        String   @id @default(cuid())
+  owner     User     @relation(fields: [ownerId], references: [userID])
+  ownerId   String
+  // 数量
+  count     Int
+  // 创建时间
+  createdAt DateTime @default(now())
+  product   Product? @relation(fields: [productID], references: [productID])
+  // 产品
+  productID Int?
+  // 其他数据
+  data      String
+}
+
+model Card {
+  user        User    @relation(fields: [userID], references: [userID])
+  // 所有者id
+  userID      String  @id
+  product     Product @relation(fields: [productID], references: [productID])
+  productID   Int
+  // 商品数据
+  productData String?
+  // 数量
+  count       Int     @default(1)
+  // 总金额
+  total       Decimal @db.Decimal(10, 2)
 }
 
 model AccessToken {
@@ -52,39 +76,49 @@ model AccessToken {
 }
 
 model Product {
-  user         User           @relation(fields: [author], references: [userID])
+  user         User           @relation(fields: [authorID], references: [userID])
   // 作者id
-  author       String
+  authorID     String
+  // 产品id
   productID    Int            @id @default(autoincrement())
   // 名称
-  name         String         @unique
+  name         String
+  avatarURL    String?
   // 描述
   summary      String?
+  // 价格
+  price        Decimal        @db.Decimal(10, 2)
   OrderDetails OrderDetails[]
+  Card         Card[]
+  Item         Item[]
 }
 
 model Order {
   // 订单号
-  orderID   Int      @id @default(autoincrement())
+  orderID      Int           @id @default(autoincrement())
   // 下单时间
-  orderDate DateTime @default(now())
-  user      User     @relation(fields: [userID], references: [userID])
+  orderDate    DateTime      @default(now())
+  user         User          @relation(fields: [userID], references: [userID])
   // 下单账户
-  userID    String
+  userID       String
   // 非下单账户的收货id
-  toID      String?
+  toID         String?
   // 状态
-  status       String
-  OrderDetails OrderDetails[]
+  status       String        @default("pending")
+  // 总金额
+  total        Decimal       @db.Decimal(10, 2)
+  OrderDetails OrderDetails?
 }
 
 model OrderDetails {
-  product   Product @relation(fields: [productID], references: [productID])
-  // 商品号
-  productID Int
-  order     Order   @relation(fields: [orderID], references: [orderID])
+  order       Order   @relation(fields: [orderID], references: [orderID])
   // 订单号
-  orderID   Int     @id
+  orderID     Int     @id
+  product     Product @relation(fields: [productID], references: [productID])
+  // 商品号
+  productID   Int
+  // 商品数据
+  productData String?
   // 数量
-  count     Int     @default(1)
+  count       Int     @default(1)
 }
