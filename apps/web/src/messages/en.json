@@ -14,5 +14,9 @@
     "namespace": "Namespace",
     "submit": "Submit",
     "passwordVerify": "Password Verify"
+  },
+  "(global)":{
+    "ua":"User Arguments",
+    "pp":"Privact policy"
   }
 }

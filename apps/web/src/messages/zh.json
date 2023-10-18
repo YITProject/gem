@@ -14,5 +14,9 @@
     "namespace": "命名空间",
     "submit": "提交",
     "passwordVerify": "确认密码"
+  },
+  "(global)": {
+    "ua": "用户协议",
+    "pp": "隐私政策"
   }
 }

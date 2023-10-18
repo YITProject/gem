@@ -3,8 +3,11 @@ import { FlexFlow } from "godown/react";
 import Logo from "ui/logo/gemgames";
 import Link from "next-intl/link";
 import { css } from "powerstyl";
+import { useTranslations } from "next-intl";
 
 export default function BaseFooter() {
+  const t = useTranslations("(global)");
+
   return (
     <footer
       slot="footer"
@@ -28,22 +31,15 @@ export default function BaseFooter() {
             padding: 0.5em 2em;
           `}
         >
-          <div
-            style={css`
-              display: flex;
-              align-items: center;
-              margin: 0.5em;
-            `}
-          >
-            <Logo color="auto" height={42} />
+          <div>
             <Link
               href="/"
               style={css`
                 margin: 6px;
-                font-size: 20px;
+                display:flex;
               `}
             >
-              Gem Games
+              <Logo color="auto" height={42} />
             </Link>
           </div>
 
@@ -55,11 +51,11 @@ export default function BaseFooter() {
             {[
               {
                 href: "http://docs.example.com/ua",
-                text: "服务条款",
+                text: "ua",
               },
               {
                 href: "http://docs.example.com/pp",
-                text: " 隐私政策",
+                text: "pp",
               },
             ].map((obj) => {
               return (
@@ -70,7 +66,7 @@ export default function BaseFooter() {
                     margin: 6px;
                   `}
                 >
-                  服务条款
+                  {t(obj.text)}
                 </a>
               );
             })}
