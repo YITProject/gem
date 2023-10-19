@@ -16,7 +16,6 @@ export const metadata: Metadata = {
 export default function Login() {
   const ref = createRef<RefType>();
   SetSubhead("Login");
-  // setSubhead("login");
   const t = useTranslations("(sign)");
   const loadFromJWT = useUserState((s) => s.loadFromJWT);
 

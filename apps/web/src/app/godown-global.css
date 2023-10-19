@@ -13,3 +13,6 @@ label-input {
 * {
   --godown-c--nav-background: #0c161d;
 }
+avatar-anchor {
+  --godown-c--ava: 1em;
+}
