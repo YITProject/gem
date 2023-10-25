@@ -8,11 +8,11 @@ base-button {
   border-radius: 4px;
 }
 label-input {
-  --godown-c--input-width: 12em;
+  --godown--input-width: 12em;
 }
 * {
-  --godown-c--nav-background: #0c161d;
+  --godown--nav-background: #0c161d;
 }
 avatar-anchor {
-  --godown-c--ava: 1em;
+  --godown--ava: 1em;
 }

@@ -19,7 +19,7 @@
   "dependencies": {
     "@prisma/client": "5.4.2",
     "common": "workspace:*",
-    "godown": "^1.2.0",
+    "godown": "^2.0.2",
     "jsonwebtoken": "^9.0.2",
     "next": "^13.5.4",
     "powerstyl": "^0.0.6",
