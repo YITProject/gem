@@ -16,6 +16,6 @@
   },
   "dependencies": {
     "crypto-js": "^4.1.1",
-    "godown": "^2.0.2"
+    "godown": "^2.0.3"
   }
 }

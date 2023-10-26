@@ -15,7 +15,7 @@
     "@types/react": "^18.2.28",
     "@types/react-dom": "^18.2.13",
     "eslint-config-custom": "workspace:*",
-    "godown": "^2.0.2",
+    "godown": "^2.0.3",
     "react": "^18.2.0",
     "tsconfig": "workspace:*",
     "typescript": "^4.9.5"
