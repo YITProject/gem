@@ -52,5 +52,6 @@ module.exports = {
     "react/function-component-definition": "off",
     "treact/jsx-sort-props": "off",
     "turbo/no-undeclared-env-vars": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
   },
 };

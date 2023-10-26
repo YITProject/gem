@@ -1,26 +1,14 @@
 "use client";
 import { NavLayout } from "godown/react";
 import React, { createContext, useEffect, useState } from "react";
-import { LitElement, css as cssc } from "godown/deps";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { css } from "powerstyl";
+import Logo from "ui/logo/gemgames";
 import { SetTheme } from "../../hooks/theme";
 import { useUserState } from "../../state/user";
 import BaseFooter from "./_base-footer";
 
-class LoadingWrapper extends LitElement {
-  static styles = cssc`
-    :host {
-      display: none !important;
-    }
-  `;
-  render() {
-    return undefined;
-  }
-}
-if (!customElements.get("loading-wrapper"))
-  customElements.define("loading-wrapper", LoadingWrapper);
 export const RootSubheadContext = createContext<(a: string) => void>(
   () => undefined,
 );
@@ -41,6 +29,7 @@ export default function RootLayout({ children }) {
         setSubhead(v);
       }}
     >
+      <LoadingWrapper />
       <NavLayout host="GemGames" subhead={subhead}>
         <div
           slot="opt"
@@ -62,9 +51,33 @@ export default function RootLayout({ children }) {
             <Link href="/login">{t("login")}</Link>
           )}
         </div>
-        {children}
+        <main
+          style={css`
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2.5%;
+          `}
+        >
+          {children}
+        </main>
         <BaseFooter />
       </NavLayout>
     </RootSubheadContext.Provider>
   );
+}
+
+export function LoadingWrapper() {
+  const [display, setDisplay] = useState(true);
+  useEffect(() => {
+    setDisplay(false);
+  }, []);
+  if (display) {
+    return (
+      <div id="loading-wrapper">
+        <Logo />
+      </div>
+    );
+  }
 }

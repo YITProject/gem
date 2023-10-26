@@ -36,17 +36,76 @@ body {
   font-size: 18px;
 }
 
-body {
+body,
+#loading-wrapper {
   /* linear-gradient(-35deg, #12588d, #5d0000); */
   color: rgb(var(--foreground));
   background: linear-gradient(
-    -35deg,
-    var(--background-end),
-    var(--background-start)
+    0deg,
+    var(--background-start),
+    var(--background-end)
   );
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+#loading-wrapper {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+}
+#loading-wrapper svg {
+  animation: infinite-spin 8s linear infinite;
+}
+@keyframes infinite-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+rotation-pool {
+  width: 1000px;
+  max-width: 95vw;
+  background: var(--godown--nav-background);
+  border-radius: 1em;
+  overflow: hidden;
+}
+.rotation-item {
+  width: 100%;
+  display: flex;
+}
+.rotation-item .rotation-details {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em;
+  justify-content: space-between;
+}
+.rotation-image {
+  width: 72%;
+  height: 400px;
+  object-fit: cover;
+}
+.comment0 {
+  color: crimson;
+}
+.comment1 {
+  color: coral;
+}
+.comment2 {
+  color: goldenrod;
+}
+.comment3 {
+  color: deepskyblue;
+}
+.comment4 {
+  color: aquamarine;
 }

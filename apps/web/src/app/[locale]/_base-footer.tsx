@@ -18,7 +18,7 @@ export default function BaseFooter() {
       <FlexFlow
         flexflow="column"
         style={css`
-          background: var(--godown-c--nav-background);
+          background: var(--godown--nav-background);
           padding: 0.5em 2.5%;
           width: 100%;
         `}

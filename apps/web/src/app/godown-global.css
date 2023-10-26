@@ -1,6 +1,4 @@
-label-input {
-  margin: 4px;
-}
+
 base-button span {
   margin: 4px 8px;
 }
@@ -8,6 +6,7 @@ base-button {
   border-radius: 4px;
 }
 label-input {
+  margin: 4px;
   --godown--input-width: 12em;
 }
 * {
@@ -15,4 +14,7 @@ label-input {
 }
 avatar-anchor {
   --godown--ava: 1em;
+}
+nav-layout{
+  height: 100%;
 }

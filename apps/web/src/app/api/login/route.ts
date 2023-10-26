@@ -37,4 +37,5 @@ export const POST = async (req: NextRequest) => {
     } as UserDataSafeType);
     return NextResponse.json({ token, to: "/profile" });
   }
+  return NextResponse.json({ error: "Invalid credentials" });
 };
