@@ -16,7 +16,22 @@
     "passwordVerify": "Password Verify"
   },
   "(global)":{
-    "ua":"User Arguments",
-    "pp":"Privact policy"
+    "ua": "User Arguments",
+    "pp": "Privact policy",
+    "developer": "Developer",
+    "issue": "Issue",
+    "comment0": "Overwhelmingly negative",
+    "comment1": "Mostly negative",
+    "comment2": "Average",
+    "comment3": "Mostly positive",
+    "comment4": "Overwhelmingly positive",
+    "commentRate": "Comment rate",
+    "crime": "Crime",
+    "fps": "FPS",
+    "act": "ACT",
+    "openWorld": "Open world",
+    "sports": "Sports",
+    "sexy": "Sexual content",
+    "story": "Story"
   }
 }
