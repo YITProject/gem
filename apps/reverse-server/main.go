@@ -11,11 +11,11 @@ func main() {
 
 	/*
 		Add these hosts in local
-		 * @see https://github.com/startracex/goup/reverse
+		 * @see https://github.com/startracex/goup/blob/main/reverse
 
-		127.0.0.1		example.com
-		127.0.0.1		login.example.com
-		127.0.0.1		docs.example.com
+127.0.0.1		example.com
+127.0.0.1		login.example.com
+127.0.0.1		docs.example.com
 
 	*/
 
