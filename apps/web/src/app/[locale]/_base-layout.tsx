@@ -1,5 +1,5 @@
 "use client";
-import { NavLayout } from "godown/react";
+import { NavLayout, AvatarAnchor } from "godown/react";
 import React, { createContext, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
@@ -45,6 +45,7 @@ export default function RootLayout({ children }) {
                 align-items: center;
               `}
             >
+              <AvatarAnchor name={name()!} />
               {name()}
             </div>
           ) : (
@@ -80,4 +81,5 @@ export function LoadingWrapper() {
       </div>
     );
   }
+  return null
 }

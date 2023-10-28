@@ -72,7 +72,8 @@ a {
   }
 }
 rotation-pool {
-  width: 1000px;
+  width: 1080px;
+  height: 400px;
   max-width: 95vw;
   background: var(--godown--nav-background);
   border-radius: 1em;

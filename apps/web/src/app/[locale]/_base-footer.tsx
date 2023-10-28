@@ -39,7 +39,7 @@ export default function BaseFooter() {
                 display:flex;
               `}
             >
-              <Logo color="auto" height={42} />
+              <Logo color="light" height={42} />
             </Link>
           </div>
 

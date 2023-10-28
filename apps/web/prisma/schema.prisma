@@ -44,7 +44,7 @@ model Item {
   createdAt DateTime @default(now())
   product   Product? @relation(fields: [productID], references: [productID])
   // 产品
-  productID Int?
+  productID String?
   // 其他数据
   data      String
 }
@@ -54,7 +54,7 @@ model Card {
   // 所有者id
   userID      String  @id
   product     Product @relation(fields: [productID], references: [productID])
-  productID   Int
+  productID   String
   // 商品数据
   productData String?
   // 数量
@@ -80,7 +80,7 @@ model Product {
   // 作者id
   authorID     String
   // 产品id
-  productID    Int            @id @default(autoincrement())
+  productID    String         @id
   // 名称
   name         String
   avatarURL    String?
@@ -116,7 +116,7 @@ model OrderDetails {
   orderID     Int     @id
   product     Product @relation(fields: [productID], references: [productID])
   // 商品号
-  productID   Int
+  productID   String
   // 商品数据
   productData String?
   // 数量

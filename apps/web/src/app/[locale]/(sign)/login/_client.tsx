@@ -1,9 +1,8 @@
 "use client";
 import { createRef } from "react";
-import { LabelInput, BaseButton } from "godown/react";
+import { type BaseForm as BaseFormType } from "godown";
+import { LabelInput, BaseButton, BaseForm } from "godown/react";
 import { useTranslations } from "next-intl";
-import type { RefType } from "ui/form/sign";
-import Form from "ui/form/sign";
 import type { User } from "@prisma/client";
 import { type Metadata } from "next";
 import { useUserState } from "../../../../state";
@@ -14,7 +13,7 @@ export const metadata: Metadata = {
   title: "Login",
 };
 export default function Login() {
-  const ref = createRef<RefType>();
+  const ref = createRef<BaseFormType>();
   SetSubhead("Login");
   const t = useTranslations("(sign)");
   const loadFromJWT = useUserState((s) => s.loadFromJWT);
@@ -23,7 +22,7 @@ export default function Login() {
     if (!ref.current) {
       return;
     }
-    const value = ref.current.value();
+    const [_, value] = ref.current.nameValue() as [string, object];
     if (!value.password) {
       // TODO err
       return;
@@ -54,7 +53,7 @@ export default function Login() {
       });
   };
   return (
-    <Form ref={ref}>
+    <BaseForm ref={ref}>
       <LabelInput
         label={t("account")}
         name="account"
@@ -66,6 +65,6 @@ export default function Login() {
           <span>{t("submit")}</span>
         </BaseButton>
       </div>
-    </Form>
+    </BaseForm>
   );
 }

@@ -1,9 +1,8 @@
 "use client";
 import { createRef } from "react";
-import { BaseButton, LabelInput } from "godown/react";
+import { BaseButton, LabelInput, BaseForm } from "godown/react";
 import { useTranslations } from "next-intl";
-import Form from "ui/form/sign";
-import type { RefType } from "ui/form/sign";
+import { type BaseForm as BaseFormType } from "godown";
 import type { User } from "@prisma/client";
 import type { Metadata } from "next";
 import { useUserState } from "../../../../state";
@@ -13,14 +12,14 @@ export const metadata: Metadata = {
   title: "Signup",
 };
 export default function Signup() {
-  const ref = createRef<RefType>();
+  const ref = createRef<BaseFormType>();
   const t = useTranslations("(sign)");
   const loadFromJWT = useUserState((s) => s.loadFromJWT);
   const submit = () => {
     if (!ref.current) {
       return;
     }
-    const value = ref.current.value();
+    const [_, value] = ref.current.nameValue() as [string, any];
     if (!testEmail(value.email)) {
       // TODO err
       return;
@@ -50,10 +49,10 @@ export default function Signup() {
       });
   };
   return (
-    <Form ref={ref}>
+    <BaseForm ref={ref}>
       <LabelInput label={t("email")} name="email" />
       <LabelInput label={t("namespace")} name="namespace" />
-      <LabelInput label={t("password")} name="password" />
+      <LabelInput label={t("password")} name="password" type="password" />
       <LabelInput
         label={t("passwordVerify")}
         name="passwordVerify"
@@ -64,6 +63,6 @@ export default function Signup() {
           <span>{t("submit")}</span>
         </BaseButton>
       </div>
-    </Form>
+    </BaseForm>
   );
 }

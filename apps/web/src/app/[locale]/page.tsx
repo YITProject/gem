@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { type RotationPool as RotationPoolClass } from "godown";
 import { BaseButton, RotationPool } from "godown/react";
-import { css } from "powerstyl";
+import { css, tagged } from "powerstyl";
 import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 
@@ -11,10 +11,10 @@ interface RotationDataType {
   name: string;
   comment: number;
   label: string[];
-  author: string[];
+  author: string;
   issue: string;
 }
-export default function Page(): JSX.Element {
+export default function Page(): JSX.Element|null {
   const roRef = useRef<RotationPoolClass | null>(null);
   const [data, setData] = useState<Partial<RotationDataType>[]>();
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function Page(): JSX.Element {
         name: "Grand Theft Auto V",
         comment: 0.98,
         label: ["crime", "openWorld", "act"],
-        author: ["Rockstar North"],
+        author: "Rockstar North",
         issue: "Rockstar Games",
       },
       {
@@ -32,7 +32,7 @@ export default function Page(): JSX.Element {
         name: "Red Dead Redemption 2",
         comment: 0.87,
         label: ["crime", "openWorld", "act"],
-        author: ["Rockstar San Diego"],
+        author: "Rockstar San Diego",
         issue: "Rockstar Games",
       },
       {
@@ -40,7 +40,7 @@ export default function Page(): JSX.Element {
         name: "Battlefield 5",
         comment: 0.4,
         label: ["fps"],
-        author: ["DICE"],
+        author: "DICE",
         issue: "Electronic Arts",
       },
       {
@@ -48,20 +48,34 @@ export default function Page(): JSX.Element {
         name: "Counter Strike 2",
         label: ["fps"],
         comment: 0.07,
-        author: ["Valve"],
+        author: "Valve",
+      },
+      {
+        id: "nba2k24",
+        name: "NBA 2K24",
+        label: ["sports"],
+        comment: 0.31,
+        author: "2K Sports",
+      },
+      {
+        id: "loveisallaround",
+        name: "完蛋我被美女包围了",
+        label: ["sexy", "story"],
+        comment: 0.77,
+        author: "Intiny",
       },
     ]);
   }, []);
-  useEffect(() => {
-    if (data && roRef.current) {
-      roRef.current.firstUpdated();
-    }
-  }, [data]);
-  return (
-    <RotationPool ref={roRef} width="100%">
-      {data?.map((i: RotationDataType) => <Item {...i} key={i.id} />)}
-    </RotationPool>
-  );
+  if (data) {
+    return (
+      <RotationPool ref={roRef} width="100%">
+        {data.map((i: RotationDataType) => (
+          <Item {...i} key={i.id} />
+        ))}
+      </RotationPool>
+    );
+  }
+  return null
 }
 
 function Item(props: RotationDataType) {
@@ -81,7 +95,12 @@ function Item(props: RotationDataType) {
   );
 }
 const comments = [0, 0.2, 0.5, 0.8, 0.95];
-
+const Text = tagged`span``
+    margin: 6px;
+    `;
+const Section = tagged`section``
+    margin: 0.6em;
+`;
 function Details(props: RotationDataType) {
   const t = useTranslations("(global)");
   let commentIndex = "";
@@ -125,26 +144,14 @@ function Details(props: RotationDataType) {
             width: 100%;
           `}
         >
-          <section
-            style={css`
-              margin: 0.6em;
-            `}
-          >
-            {t("developer")}:{props.author.join(", ")}
-          </section>
-          <section
-            style={css`
-              margin: 0.6em;
-            `}
-          >
-            {t("issue")}:{props.issue || props.author[0]}
-          </section>
-          <section
-            style={css`
-              margin: 0.6em;
-            `}
-          >
-            {t("commentRate")}:{(props.comment * 100).toFixed()}%
+          <Section>
+            {t("developer")}:<Text>{props.author}</Text>
+          </Section>
+          <Section>
+            {t("issue")}:<Text>{props.issue || props.author}</Text>
+          </Section>
+          <Section>
+            {t("commentRate")}:<Text>{(props.comment * 100).toFixed()}%</Text>
             <span
               className={`comment${commentIndex}`}
               style={css`
@@ -153,7 +160,7 @@ function Details(props: RotationDataType) {
             >
               {t(`comment${commentIndex}`)}
             </span>
-          </section>
+          </Section>
         </div>
       </main>
     </div>
