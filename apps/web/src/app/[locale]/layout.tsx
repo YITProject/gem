@@ -27,7 +27,7 @@ export default async function LocaleLayout({ children, params: { locale } }) {
   return (
     <html lang={locale}>
       <head>
-        <link href="gemgames.svg" rel="shortcut icon" type="image/svg" />
+        <link href="/gemgames.svg" rel="shortcut icon" type="image/svg" />
       </head>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>

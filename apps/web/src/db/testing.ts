@@ -84,7 +84,7 @@ void (async () => {
     email: "service@indienova.com",
     password: "unset",
     location: "cn",
-    avatarURL: "/avatar/indienova.jpg",
+    avatarURL: "/avatar/indienova.png",
     type: "organization",
   });
 
