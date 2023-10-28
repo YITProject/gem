@@ -10,12 +10,12 @@ apps/reverse-server是一个反代服务器, 他现在具有这些反代规则
   login.example.com/ => localhost:9527
 ```
 
-将BaseURL之前的域名和指向的地址添加入hosts
+将BaseURL之前的域名和指向的地址添加入hosts, 如下
 
 ```txt
-  127.0.0.1		example.com
-  127.0.0.1		login.example.com
-  127.0.0.1		docs.example.com
+127.0.0.1		example.com
+127.0.0.1		login.example.com
+127.0.0.1		docs.example.com
 ```
 
 现在运行`apps/reverse-server/main.go`, goup/reverse 将按照规则执行反代服务. 参阅 [此处](https://github.com/startracex/goup/reverse)
