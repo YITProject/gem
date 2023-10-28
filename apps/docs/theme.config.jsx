@@ -6,7 +6,7 @@ export default {
   head: (
     <link href={svg.src} rel="shortcut icon" type="image/svg" />
   ),
-  logo: <GemGamesLogo color="light" height="36" />,
+  logo: <GemGamesLogo color="auto" height="36" />,
   project: {
     link: "https://github.com/yitproject/gem",
   },

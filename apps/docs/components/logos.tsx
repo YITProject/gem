@@ -30,7 +30,7 @@ const logos: {
   },
   {
     compoent: <h1>Godown</h1>,
-    name: "Html/React compoents library",
+    name: "Web components library",
     href: "https://github.com/startracex/godown",
   },
 ];
