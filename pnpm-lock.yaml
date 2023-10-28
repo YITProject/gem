@@ -101,8 +101,8 @@ importers:
         specifier: ^13.5.4
         version: 13.5.4(react-dom@18.2.0)(react@18.2.0)
       powerstyl:
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^0.1.1
+        version: 0.1.1
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -6440,8 +6440,8 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.0.2
 
-  /powerstyl@0.1.0:
-    resolution: {integrity: sha512-RITWIWnxnPJ/n6rTBCfHZIuq4eXDSEsiPQvzagXUfvVFOFLiklbMjl1GBG31290Cs8pG9mzRBKHTGg09Wa6Bzw==}
+  /powerstyl@0.1.1:
+    resolution: {integrity: sha512-LtRWd6PBfVQQvmc/NwfFyNkfcXXirj6kPvJs3URWm3Gotg25hZP2upe0KvZjPEkN9DfbCOal851ODSTRMgtBMw==}
     dependencies:
       less: 4.2.0
       react: 18.2.0
