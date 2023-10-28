@@ -30,37 +30,36 @@ model User {
   AccessToken AccessToken[]
   Product     Product[]
   Order       Order[]
-  Card        Card?
   Item        Item[]
+  Cart        Cart[]
 }
 
+// 物品
 model Item {
-  id        String   @id @default(cuid())
-  owner     User     @relation(fields: [ownerId], references: [userID])
-  ownerId   String
+  itemID    String   @id @default(cuid())
+  owner     User     @relation(fields: [ownerID], references: [userID])
+  // 所有者id
+  ownerID   String
   // 数量
-  count     Int
+  count     Int      @default(1)
   // 创建时间
   createdAt DateTime @default(now())
   product   Product? @relation(fields: [productID], references: [productID])
   // 产品
   productID String?
-  // 其他数据
-  data      String
 }
 
-model Card {
-  user        User    @relation(fields: [userID], references: [userID])
-  // 所有者id
-  userID      String  @id
-  product     Product @relation(fields: [productID], references: [productID])
-  productID   String
-  // 商品数据
-  productData String?
-  // 数量
-  count       Int     @default(1)
-  // 总金额
-  total       Decimal @db.Decimal(10, 2)
+// 购物车内容
+model Cart {
+  cardID String @id @default(cuid())
+
+  user   User   @relation(fields: [userID], references: [userID])
+  userID String
+
+  Product   Product? @relation(fields: [productID], references: [productID])
+  productID String?
+
+  count Int @default(1)
 }
 
 model AccessToken {
@@ -75,6 +74,7 @@ model AccessToken {
   expiresAt DateTime?
 }
 
+// 产品
 model Product {
   user         User           @relation(fields: [authorID], references: [userID])
   // 作者id
@@ -83,42 +83,56 @@ model Product {
   productID    String         @id
   // 名称
   name         String
+  // 头像url
   avatarURL    String?
   // 描述
   summary      String?
   // 价格
   price        Decimal        @db.Decimal(10, 2)
+  // 评价
+  comment      Float
+  // 标签
+  labels       String[]
+  // 开放者
+  deverlopers  String[]
+  // 发行商
+  issuers      String[]
+  // 类型
+  type         String         @default("game")
   OrderDetails OrderDetails[]
-  Card         Card[]
+  Cart         Cart[]
   Item         Item[]
 }
 
+// 订单
 model Order {
   // 订单号
-  orderID      Int           @id @default(autoincrement())
+  orderID      Int            @id @default(autoincrement())
   // 下单时间
-  orderDate    DateTime      @default(now())
-  user         User          @relation(fields: [userID], references: [userID])
+  orderDate    DateTime       @default(now())
+  user         User           @relation(fields: [userID], references: [userID])
   // 下单账户
   userID       String
   // 非下单账户的收货id
   toID         String?
   // 状态
-  status       String        @default("pending")
+  // 待付款: pending
+  // 正常完成: completed
+  // 已退款: refunded
+  status       String         @default("pending")
   // 总金额
-  total        Decimal       @db.Decimal(10, 2)
-  OrderDetails OrderDetails?
+  total        Decimal        @db.Decimal(10, 2)
+  OrderDetails OrderDetails[]
 }
 
 model OrderDetails {
-  order       Order   @relation(fields: [orderID], references: [orderID])
+  orderDetailsID String  @id @default(cuid())
+  order          Order   @relation(fields: [orderID], references: [orderID])
   // 订单号
-  orderID     Int     @id
-  product     Product @relation(fields: [productID], references: [productID])
+  orderID        Int
+  product        Product @relation(fields: [productID], references: [productID])
   // 商品号
-  productID   String
-  // 商品数据
-  productData String?
+  productID      String
   // 数量
-  count       Int     @default(1)
+  count          Int     @default(1)
 }
