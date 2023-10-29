@@ -7,6 +7,7 @@ let alert = (option: Partial<AlertItem>) => {
     const a = document.createElement("div");
     a.id = "alert";
     document.body.appendChild(a);
+    // eslint-disable-next-line @typescript-eslint/no-shadow
     alert = (option: Partial<AlertItem>) => {
       AlertItem.alert(document.querySelector("#alert")!, option);
     };

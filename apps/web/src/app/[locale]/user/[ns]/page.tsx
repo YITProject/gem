@@ -27,7 +27,7 @@ export default function User({
     <>
       {JSON.stringify(data)}
       ID{data.userID}
-      昵称:{data.displayName||data.namespace}
+      昵称:{data.displayName || data.namespace}
       地区:{data.location}
       账户类型:{data.type}
     </>

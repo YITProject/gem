@@ -44,7 +44,7 @@ function Details({ data }: { data: Product }) {
   const t = useTranslations("(global)");
   const tl = useTranslations("(labels)");
   const comments = [0, 0.2, 0.5, 0.8, 0.95];
-  const commentIndex = comments.findLastIndex((c) => c <= data.comment);
+  const commentIndex = comments.findIndex((comment) => comment > data.comment);
   return (
     <div className={cls.details}>
       <section>

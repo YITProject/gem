@@ -30,7 +30,6 @@ export const POST = async (req: NextRequest) => {
     return new Response("404 Not found", { status: 404 });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   const findPassword: Password | null = await db.password.findFirst({
     where: { userID: findUser.userID, password: data.password },
   });

@@ -16,7 +16,7 @@ export default function Game({
   params: { locale: string; id: string };
 }) {
   const t = useTranslations("(global)");
-  const l = useTranslations("(labels)")
+  const l = useTranslations("(labels)");
   const { id } = params;
   const { data, error, isLoading } = useSWR<Product | null>(
     `/api/game/${id}`,

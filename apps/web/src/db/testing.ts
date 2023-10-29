@@ -16,13 +16,13 @@ export const sha1 = (data: string) => {
 };
 
 const db = new PrismaClient();
-// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
+
 async function createUser(data: Partial<User & Password>) {
   const user: User = await db.user.create({
     data: data as User,
   });
   if (data.password) {
-    db.password.create({
+    await db.password.create({
       data: {
         userID: user.userID,
         password: data.password,
