@@ -2,6 +2,7 @@ import { type AbstractIntlMessages, NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import "../globals.css";
 import "../godown-global.css";
+import "ui/logo/loading.css";
 import { type Metadata } from "next";
 import { i18n } from "../../../next.config.js";
 import RootLayout from "./_base-layout";
@@ -23,7 +24,6 @@ export default async function LocaleLayout({ children, params: { locale } }) {
     notFound();
   }
 
-
   return (
     <html lang={locale}>
       <head>
@@ -36,12 +36,4 @@ export default async function LocaleLayout({ children, params: { locale } }) {
       </body>
     </html>
   );
-}
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      "loading-wrapper": unknown;
-    }
-  }
 }

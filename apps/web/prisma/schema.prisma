@@ -15,7 +15,6 @@ model User {
   userID      String        @id @default(uuid())
   // 邮箱
   email       String        @unique
-  password    String?
   // 命名空间
   namespace   String        @unique @default(uuid())
   // 显示名称
@@ -32,6 +31,14 @@ model User {
   Order       Order[]
   Item        Item[]
   Cart        Cart[]
+  Password    Password?
+}
+
+model Password {
+  user     User    @relation(fields: [userID], references: [userID])
+  userID   String  @id
+  password String
+  twofa    Boolean @default(false)
 }
 
 // 物品
@@ -76,32 +83,39 @@ model AccessToken {
 
 // 产品
 model Product {
-  user         User           @relation(fields: [authorID], references: [userID])
+  user          User           @relation(fields: [authorID], references: [userID])
   // 作者id
-  authorID     String
+  authorID      String
   // 产品id
-  productID    String         @id
+  productID     String         @id
   // 名称
-  name         String
-  // 头像url
-  avatarURL    String?
+  name          String
+  // 图标url
+  iconURL       String?
+  // 资源url
+  resourcesURLs String[]
   // 描述
-  summary      String?
+  summary       String?
   // 价格
-  price        Decimal        @db.Decimal(10, 2)
+  price         Decimal        @db.Decimal(10, 2)
   // 评价
-  comment      Float
+  comment       Float
   // 标签
-  labels       String[]
+  labels        String[]
   // 开放者
-  deverlopers  String[]
+  deverlopers   String[]
   // 发行商
-  issuers      String[]
+  issuers       String[]
   // 类型
-  type         String         @default("game")
-  OrderDetails OrderDetails[]
-  Cart         Cart[]
-  Item         Item[]
+  type          String         @default("game")
+  OrderDetails  OrderDetails[]
+  Cart          Cart[]
+  Item          Item[]
+}
+
+model ProductHot {
+  hotID      Int      @id @default(autoincrement())
+  productIDs String[]
 }
 
 // 订单

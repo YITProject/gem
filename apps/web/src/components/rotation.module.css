@@ -1,0 +1,39 @@
+.container {
+  width: 100%;
+  height: 100%;
+  background: var(--godown--nav-background);
+  border-radius: 1em;
+  display: grid;
+  grid-template-columns: 68fr 32fr;
+}
+.image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.details {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em;
+  justify-content: space-between;
+}
+.labels {
+  display: flex;
+  flex-wrap: wrap;
+}
+.details h2 {
+  margin: 8px;
+}
+.labels a {
+  margin: 6px;
+}
+.labels span {
+  margin: 4px 10px;
+}
+.details p {
+  margin: 8px;
+  color: #cdcdcd;
+}
+.details span {
+  margin: 8px;
+}

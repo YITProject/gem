@@ -4,26 +4,30 @@ import { create } from "zustand";
 import { decode } from "jsonwebtoken";
 import type { User } from "@prisma/client";
 
-export type UserDataSafeType = Partial<Omit<User, "password">>;
+export type UserData = User;
 const init = (set, get) => {
   const states = {
-    data: null as UserDataSafeType | null,
+    data: null as UserData | null,
     isLogin: false,
     name() {
-      const got = get().data as UserDataSafeType | null;
+      const got = get().data as UserData | null;
       if (got) {
         return got.displayName || got.namespace || null;
       }
       return null;
     },
-    login(setter: object) {
+
+    // 登录, 并保存arg0到状态, 设置isLogin为true
+    login(arg0: UserData) {
       set(() => {
         return {
-          data: setter,
+          data: arg0,
           isLogin: true,
         };
       });
     },
+
+    // 登出, 设置isLogin为false
     logout() {
       set(() => {
         return {
@@ -32,10 +36,12 @@ const init = (set, get) => {
         };
       });
     },
+
+    //
     load() {
       const token = localStorage.getItem("TOKEN");
       if (token) {
-        const data = decode(token) as object | null;
+        const data = decode(token) as null | User;
         if (data) {
           states.login(data);
         }
@@ -43,7 +49,7 @@ const init = (set, get) => {
       }
       return null;
     },
-    loadFromJWT(token?: string, autosave = true) {
+    loadJWT(token?: string, autosave = true) {
       if (!token) {
         token = localStorage.getItem("TOKEN")!;
         if (!token) {
@@ -51,7 +57,7 @@ const init = (set, get) => {
           return;
         }
       }
-      const data = decode(token) as null | object;
+      const data = decode(token) as null | User;
       if (data) {
         states.login(data);
       }

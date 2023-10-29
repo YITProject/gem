@@ -4,7 +4,7 @@ import React, { createContext, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { css } from "powerstyl";
-import Logo from "ui/logo/gemgames";
+import Loading from "ui/logo/loading";
 import { SetTheme } from "../../hooks/theme";
 import { useUserState } from "../../state/user";
 import BaseFooter from "./_base-footer";
@@ -39,7 +39,8 @@ export default function RootLayout({ children }) {
           `}
         >
           {isLogin ? (
-            <div
+            <Link
+              href="/profile"
               style={css`
                 display: flex;
                 align-items: center;
@@ -47,7 +48,7 @@ export default function RootLayout({ children }) {
             >
               <AvatarAnchor name={name()!} />
               {name()}
-            </div>
+            </Link>
           ) : (
             <Link href="/login">{t("login")}</Link>
           )}
@@ -58,7 +59,8 @@ export default function RootLayout({ children }) {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 2.5%;
+            justify-content: center;
+            position: relative;
           `}
         >
           {children}
@@ -75,11 +77,7 @@ export function LoadingWrapper() {
     setDisplay(false);
   }, []);
   if (display) {
-    return (
-      <div id="loading-wrapper">
-        <Logo />
-      </div>
-    );
+    return <Loading className="fixed" />;
   }
-  return null
+  return null;
 }

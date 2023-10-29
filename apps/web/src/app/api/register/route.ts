@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 import type { User } from "@prisma/client";
 import db from "../../../db";
 import jwt from "../../../common/jwt";
-import type { UserDataSafeType } from "../../../state";
 
 type DataType = {
   email: string;
@@ -13,9 +12,7 @@ type DataType = {
 export const POST = async (req: NextRequest) => {
   const data = (await req.json()) as DataType;
   if (!data.email || !data.namespace || !data.password) {
-    return NextResponse.json({
-      message: "Illegal field",
-    });
+    return new Response("Illegal request", { status: 400 });
   }
   const findExists: User[] = await db.user.findMany({
     where: {
@@ -23,25 +20,20 @@ export const POST = async (req: NextRequest) => {
     },
   });
   if (findExists.length > 0) {
-    return NextResponse.json({
-      message: "Already exists",
-    });
+    return new Response("404 Not found", { status: 400 });
   }
-  const createdata: UserDataSafeType = {
+  const createdata = {
     email: data.email,
     namespace: data.namespace,
     displayName: data.displayName || data.namespace,
     location: data.location || "us",
     type: data.type || "user",
     createdAt: new Date(),
-  };
-  await db.user.create({
-    data: {
-      ...createdata,
-      password: data.password,
-    },
+  } as User;
+  const payload: User = await db.user.create({
+    data: createdata,
   });
-  const token = jwt.sign(createdata);
+  const token = jwt.sign(payload);
 
   return NextResponse.json({ token, to: "/profile" });
 };

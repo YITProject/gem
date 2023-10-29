@@ -3,11 +3,13 @@ import { createRef } from "react";
 import { type BaseForm as BaseFormType } from "godown";
 import { LabelInput, BaseButton, BaseForm } from "godown/react";
 import { useTranslations } from "next-intl";
-import type { User } from "@prisma/client";
 import { type Metadata } from "next";
+import { redirect } from "next/navigation";
+import { css } from "powerstyl";
 import { useUserState } from "../../../../state";
 import { testEmail, testNamespace, sha1 } from "../../../../common";
 import { SetSubhead } from "../../../../hooks/subhead";
+import alert from "../../../../hooks/alert";
 
 export const metadata: Metadata = {
   title: "Login",
@@ -16,55 +18,95 @@ export default function Login() {
   const ref = createRef<BaseFormType>();
   SetSubhead("Login");
   const t = useTranslations("(sign)");
-  const loadFromJWT = useUserState((s) => s.loadFromJWT);
-
+  const w = useTranslations("(wrong)");
+  const loadJWT = useUserState((s) => s.loadJWT);
   const submit = () => {
     if (!ref.current) {
       return;
     }
-    const [_, value] = ref.current.nameValue() as [string, object];
-    if (!value.password) {
-      // TODO err
+    const [_, value] = ref.current.nameValue() as [
+      string,
+      Partial<{
+        account: string;
+        password: string;
+      }>,
+    ];
+    if (!value.password || !value.account) {
+      alert({
+        call: "warning",
+        content: w("missing-require-field"),
+      });
       return;
     }
-    const data: Partial<User> = {
+    const data: typeof value &
+      Partial<{
+        email: string;
+        namespace: string;
+      }> = {
       password: sha1(value.password),
     };
-    if (value.account) {
-      if (testEmail(value.account)) {
-        data.email = value.account;
-      } else if (testNamespace(value.account)) {
-        data.namespace = value.account;
-      }
+
+    if (testEmail(value.account)) {
+      data.email = value.account;
+    } else if (testNamespace(value.account)) {
+      data.namespace = value.account;
     } else {
+      alert({
+        call: "warning",
+        content: w("invalid-input"),
+      });
       return;
     }
+
     void fetch("/api/login", {
       method: "post",
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
       .then((jsondata) => {
-        const { token, to } = jsondata;
+        const { token, to } = jsondata as { token: string; to?: string };
         if (token) {
-          loadFromJWT(token as string, true);
+          loadJWT(token, true);
         }
-        window.location.pathname = to || "/";
+        redirect(to || "/");
+      })
+      .catch(() => {
+        alert({
+          call: "warning",
+          content: w("server-error"),
+        });
       });
   };
   return (
-    <BaseForm ref={ref}>
-      <LabelInput
-        label={t("account")}
-        name="account"
-        pla={`${t("namespace")}/${t("email")}`}
-      />
-      <LabelInput label={t("password")} name="password" type="password" />
-      <div>
-        <BaseButton onClick={submit}>
-          <span>{t("submit")}</span>
-        </BaseButton>
-      </div>
-    </BaseForm>
+    <div>
+      <BaseForm ref={ref}>
+        <LabelInput name="account" pla={`${t("namespace")}/${t("email")}`}>
+          <span
+            style={css`
+              margin-right: 8px;
+            `}
+          >
+            {t("account")}
+          </span>
+        </LabelInput>
+        <LabelInput name="password" type="password">
+          <span
+            style={css`
+              margin-right: 8px;
+            `}
+          >
+            {t("password")}
+          </span>
+        </LabelInput>
+      </BaseForm>
+      <BaseButton
+        onClick={submit}
+        style={css`
+          margin: 0.5em;
+        `}
+      >
+        <span>{t("submit")}</span>
+      </BaseButton>
+    </div>
   );
 }

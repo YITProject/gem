@@ -16,6 +16,7 @@
     "@types/react-dom": "^18.2.13",
     "eslint-config-custom": "workspace:*",
     "godown": "^2.0.8",
+    "powerstyl": "^0.1.1",
     "react": "^18.2.0",
     "tsconfig": "workspace:*",
     "typescript": "^4.9.5"

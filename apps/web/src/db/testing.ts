@@ -5,6 +5,7 @@ import type {
   Item,
   Order,
   OrderDetails,
+  Password,
   Product,
   User,
 } from "@prisma/client";
@@ -15,13 +16,20 @@ export const sha1 = (data: string) => {
 };
 
 const db = new PrismaClient();
-async function createUser(data: Partial<User>) {
-  if (data.password) {
-    data.password = sha1(data.password);
-  }
-  return db.user.create({
+// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
+async function createUser(data: Partial<User & Password>) {
+  const user: User = await db.user.create({
     data: data as User,
-  }) as Promise<User>;
+  });
+  if (data.password) {
+    db.password.create({
+      data: {
+        userID: user.userID,
+        password: data.password,
+      },
+    });
+  }
+  return user;
 }
 
 void (async () => {
@@ -29,7 +37,6 @@ void (async () => {
     namespace: "examplea",
     displayName: "exampleA",
     email: "a@example.com",
-    password: "unset",
     location: "ru",
     avatarURL: null,
     type: "user",
@@ -38,7 +45,6 @@ void (async () => {
     namespace: "exampleb",
     displayName: "exampleB",
     email: "b@example.com",
-    password: "unset",
     location: "de",
     avatarURL: null,
     type: "user",
@@ -47,7 +53,6 @@ void (async () => {
     namespace: "rockstar",
     displayName: "Rockstar Games",
     email: "service@rockstargames.com",
-    password: "unset",
     location: "uk",
     avatarURL: "/avatar/rockstar.jpg",
     type: "organization",
@@ -55,7 +60,6 @@ void (async () => {
   const userEa: User = await createUser({
     namespace: "ea",
     email: "service@ea.com",
-    password: "unset",
     location: "us",
     avatarURL: "/avatar/ea.jpg",
     type: "organization",
@@ -64,7 +68,6 @@ void (async () => {
     namespace: "valve",
     displayName: "Valve",
     email: "service@valve.com",
-    password: "unset",
     location: "us",
     avatarURL: "/avatar/valve.jpg",
     type: "organization",
@@ -88,17 +91,15 @@ void (async () => {
     type: "organization",
   });
 
-  const prods: Product[] = [
+  const prodsMeta: Partial<Product>[] = [
     // TODO games
     {
       productID: "gta5",
       name: "Grand Theft Auto V",
       authorID: userRockstar.userID,
       price: new Prisma.Decimal(19),
-      avatarURL: "",
-      summary: "GTA5",
       comment: 0.98,
-      labels: ["crime", "openWorld", "act"],
+      labels: ["crime", "open-world", "act"],
       deverlopers: ["Rockstar North"],
       issuers: ["Rockstar Games"],
       type: "game",
@@ -108,10 +109,8 @@ void (async () => {
       name: "Red Dead Redemption 2",
       authorID: userRockstar.userID,
       price: new Prisma.Decimal(29),
-      avatarURL: "",
-      summary: "RDR2",
       comment: 0.87,
-      labels: ["crime", "openWorld", "act"],
+      labels: ["crime", "open-world", "act"],
       deverlopers: ["Rockstar San Diego"],
       issuers: ["Rockstar Games"],
       type: "game",
@@ -121,8 +120,6 @@ void (async () => {
       name: "Battlefield 5",
       authorID: userEa.userID,
       price: new Prisma.Decimal(9),
-      avatarURL: "",
-      summary: "BF5",
       comment: 0.4,
       labels: ["fps"],
       deverlopers: ["DICE"],
@@ -130,12 +127,10 @@ void (async () => {
       type: "game",
     },
     {
-      productID: "cs",
+      productID: "cs2",
       name: "Counter Strike 2",
       authorID: userValve.userID,
       price: new Prisma.Decimal(0),
-      avatarURL: "",
-      summary: "CS2",
       labels: ["fps"],
       comment: 0.07,
       deverlopers: ["Valve"],
@@ -147,8 +142,6 @@ void (async () => {
       name: "NBA 2K24",
       authorID: user2k.userID,
       price: new Prisma.Decimal(39),
-      avatarURL: "",
-      summary: "",
       labels: ["sports"],
       comment: 0.31,
       deverlopers: ["2K Sports"],
@@ -160,8 +153,6 @@ void (async () => {
       name: "完蛋我被美女包围了",
       authorID: userInd.userID,
       labels: ["sexy", "story"],
-      avatarURL: "",
-      summary: "完蛋我被美女包围了",
       price: new Prisma.Decimal(6.9),
       comment: 0.77,
       deverlopers: ["Intiny"],
@@ -174,8 +165,6 @@ void (async () => {
       name: "NBA Hero Kun",
       authorID: user2k.userID,
       price: new Prisma.Decimal(9),
-      avatarURL: "",
-      summary: "",
       labels: ["sports"],
       comment: 0.99,
       deverlopers: ["2K Sports"],
@@ -187,8 +176,6 @@ void (async () => {
       name: "NBA Hero Kobe",
       authorID: user2k.userID,
       price: new Prisma.Decimal(19),
-      avatarURL: "",
-      summary: "",
       labels: ["sports"],
       comment: 0.39,
       deverlopers: ["2K Sports"],
@@ -197,8 +184,25 @@ void (async () => {
     },
   ];
 
+  const prods: Product[] = prodsMeta.map((prod: Partial<Product>) => {
+    prod.resourcesURLs = [`/resources/${prod.productID}.webp`];
+    if (!prod.iconURL) {
+      prod.iconURL = `/icon/${prod.productID}.png`;
+    }
+    return prod as Product;
+  });
+
   await db.product.createMany({
     data: prods,
+  });
+  const ids = prods
+    .filter((prod: Product) => prod.type === "game")
+    .map((prod: Product) => prod.productID);
+
+  await db.productHot.create({
+    data: {
+      productIDs: [...ids],
+    },
   });
 
   const cartA1: Cart = await db.cart.create({

@@ -1,6 +1,6 @@
-
 base-button span {
   margin: 4px 8px;
+  display: flex;
 }
 base-button {
   border-radius: 4px;
@@ -15,6 +15,6 @@ label-input {
 avatar-anchor {
   --godown--ava: 1em;
 }
-nav-layout{
+nav-layout {
   height: 100%;
 }

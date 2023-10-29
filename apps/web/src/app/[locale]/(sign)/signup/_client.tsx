@@ -3,66 +3,74 @@ import { createRef } from "react";
 import { BaseButton, LabelInput, BaseForm } from "godown/react";
 import { useTranslations } from "next-intl";
 import { type BaseForm as BaseFormType } from "godown";
-import type { User } from "@prisma/client";
-import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import { useUserState } from "../../../../state";
 import { testEmail, testNamespace, sha1 } from "../../../../common";
+import alert from "../../../../hooks/alert";
 
-export const metadata: Metadata = {
-  title: "Signup",
-};
 export default function Signup() {
   const ref = createRef<BaseFormType>();
   const t = useTranslations("(sign)");
-  const loadFromJWT = useUserState((s) => s.loadFromJWT);
+  const w = useTranslations("(warn)");
+  const loadJWT = useUserState((s) => s.loadJWT);
+
   const submit = () => {
     if (!ref.current) {
       return;
     }
-    const [_, value] = ref.current.nameValue() as [string, any];
-    if (!testEmail(value.email)) {
-      // TODO err
+
+    const [_, value] = ref.current.nameValue() as [
+      string,
+      Partial<{
+        email: string;
+        namespace: string;
+        password: string;
+      }>,
+    ];
+
+    if (!testEmail(value.email) || !testNamespace(value.namespace)) {
+      alert({
+        call: "warning",
+        content: w("invalid-input"),
+      });
       return;
     }
-    if (!testNamespace(value.namespace)) {
-      // TODO err
-      return;
-    }
-    const data: Partial<User> = {
+    const data: typeof value = {
       email: value.email,
       namespace: value.namespace,
     };
     if (value.password) {
       data.password = sha1(value.password);
     }
+
     void fetch("/api/register", {
       method: "post",
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
       .then((jsondata) => {
-        const { token, to } = jsondata;
+        const { token, to } = jsondata as { token: string; to?: string };
         if (token) {
-          loadFromJWT(token as string, true);
+          loadJWT(token, true);
         }
-        window.location.pathname = to || "/";
+        redirect(to || "/");
       });
   };
   return (
-    <BaseForm ref={ref}>
-      <LabelInput label={t("email")} name="email" />
-      <LabelInput label={t("namespace")} name="namespace" />
-      <LabelInput label={t("password")} name="password" type="password" />
-      <LabelInput
-        label={t("passwordVerify")}
-        name="passwordVerify"
-        type="password"
-      />
-      <div>
-        <BaseButton onClick={submit}>
-          <span>{t("submit")}</span>
-        </BaseButton>
-      </div>
-    </BaseForm>
+    <div>
+      <BaseForm ref={ref}>
+        <LabelInput label={t("email")} name="email" />
+        <LabelInput label={t("namespace")} name="namespace" />
+        <LabelInput label={t("password")} name="password" type="password" />
+        <LabelInput
+          label={t("password-verify")}
+          name="passwordVerify"
+          type="password"
+        />
+      </BaseForm>
+      <BaseButton onClick={submit}>
+        <span>{t("submit")}</span>
+      </BaseButton>
+    </div>
   );
 }

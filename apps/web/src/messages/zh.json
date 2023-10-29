@@ -13,25 +13,37 @@
     "account": "账号",
     "namespace": "命名空间",
     "submit": "提交",
-    "passwordVerify": "确认密码"
+    "password-verify": "确认密码"
   },
   "(global)": {
     "ua": "用户协议",
     "pp": "隐私政策",
-    "developer": "开发",
-    "issue": "发行",
-    "comment0": "差评如潮",
-    "comment1": "差评过半",
-    "comment2": "中规中矩",
-    "comment3": "好评过半",
-    "comment4": "好评如潮",
-    "commentRate": "好评率",
+    "developers": "开发商",
+    "issuers": "发行商",
+    "comment1": "差评如潮",
+    "comment2": "多半差评",
+    "comment3": "中规中矩",
+    "comment4": "多半好评",
+    "comment5": "好评如潮",
+    "comment-rate": "好评率",
+    "add-cart": "加入购物车"
+  },
+  "(labels)": {
     "crime": "犯罪",
     "fps": "第一人称射击",
     "act": "动作冒险",
-    "openWorld": "开放世界",
+    "open-world": "开放世界",
     "sports": "体育运动",
     "sexy": "色情裸露",
     "story": "剧情"
+  },
+  "(wrong)": {
+    "missing-require-field": "缺少必须字段",
+    "invalid-input": "无效输入",
+    "unauthorized-access": "未授权的访问",
+    "network-error": "网络错误",
+    "database-error": "数据库错误",
+    "server-error": "服务器错误",
+    "timeout-error": "请求超时"
   }
 }

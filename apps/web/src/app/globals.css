@@ -27,6 +27,9 @@
   padding: 0;
   margin: 0;
 }
+li {
+  list-style: none;
+}
 
 html,
 body {
@@ -36,8 +39,7 @@ body {
   font-size: 18px;
 }
 
-body,
-#loading-wrapper {
+body {
   /* linear-gradient(-35deg, #12588d, #5d0000); */
   color: rgb(var(--foreground));
   background: linear-gradient(
@@ -51,62 +53,44 @@ a {
   color: inherit;
   text-decoration: none;
 }
-#loading-wrapper {
-  display: flex;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  z-index: 999;
-  align-items: center;
-  justify-content: center;
-}
-#loading-wrapper svg {
-  animation: infinite-spin 8s linear infinite;
-}
-@keyframes infinite-spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
+@media screen and (max-width: 720px) {
+  .col-m {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
-rotation-pool {
-  width: 1080px;
-  height: 400px;
-  max-width: 95vw;
-  background: var(--godown--nav-background);
-  border-radius: 1em;
-  overflow: hidden;
-}
-.rotation-item {
-  width: 100%;
-  display: flex;
-}
-.rotation-item .rotation-details {
-  width: 30%;
+
+.col {
   display: flex;
   flex-direction: column;
-  padding: 0.5em;
-  justify-content: space-between;
+  align-items: center;
 }
-.rotation-image {
-  width: 72%;
-  height: 400px;
-  object-fit: cover;
+.fixed {
+  position: fixed;
 }
-.comment0 {
+
+.comment-1 {
   color: crimson;
 }
-.comment1 {
+.comment-2 {
   color: coral;
 }
-.comment2 {
+.comment-3 {
   color: goldenrod;
 }
-.comment3 {
+.comment-4 {
   color: deepskyblue;
 }
-.comment4 {
+.comment-5 {
   color: aquamarine;
+}
+#alert {
+  position: fixed;
+  top: 20%;
+  margin: auto;
+  left: 0;
+  right: 0;
+  width: min(60%, 800px);
+  z-index: 800;
 }
