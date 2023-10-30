@@ -1,8 +1,11 @@
 "use client";
 import type { User } from "@prisma/client";
+import { AvatarAnchor } from "godown/react";
 import { notFound } from "next/navigation";
 import useSWR from "swr";
 import Loading from "ui/logo/loading";
+import { SetSubhead } from "../../../../hooks/subhead";
+import cls from "./page.module.css";
 
 const fetcher = (url: RequestInfo | URL) =>
   fetch(url).then((res) => res.json());
@@ -23,13 +26,19 @@ export default function User({
   if (isLoading || !data) {
     return <Loading />;
   }
+  const name = data.displayName || data.namespace;
+  SetSubhead(name);
   return (
-    <>
-      {JSON.stringify(data)}
-      ID{data.userID}
-      昵称:{data.displayName || data.namespace}
-      地区:{data.location}
-      账户类型:{data.type}
-    </>
+    <div className={cls.container}>
+      <AvatarAnchor className={cls.avatar} name={name} src={data.avatarURL!} />
+
+      <h2>{name}</h2>
+
+      <p>地区:{data.location}</p>
+      <p>
+        加入自
+        {new Date(data.createdAt).toLocaleDateString()}
+      </p>
+    </div>
   );
 }

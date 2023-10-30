@@ -12,6 +12,8 @@ export default function Rotation(props: { data: Product[] }) {
     <RotationPool
       style={css`
         width: 840px;
+        border-radius: 1em;
+        overflow: hidden;
       `}
     >
       {props.data.map((product) => {
@@ -43,12 +45,14 @@ const Text = tagged`span``
 function Details({ data }: { data: Product }) {
   const t = useTranslations("(global)");
   const tl = useTranslations("(labels)");
-  const comments = [0, 0.2, 0.5, 0.8, 0.95];
+  const comments = [0, 0.2, 0.5, 0.8, 0.95, 1];
   const commentIndex = comments.findIndex((comment) => comment > data.comment);
   return (
     <div className={cls.details}>
       <section>
-        <h2>{data.name}</h2>
+        <Link href={`/game/${data.productID}`}>
+          <h2>{data.name}</h2>
+        </Link>
         <div className={cls.labels}>
           {data.labels.map((label) => {
             return (
@@ -71,9 +75,23 @@ function Details({ data }: { data: Product }) {
         <p>
           {t("comment-rate")}:<Text>{(data.comment * 100).toFixed()}%</Text>
         </p>
-        <span className={`comment-${commentIndex + 1}`}>
-          {t(`comment${commentIndex + 1}`)}
+        <span className={`comment-${commentIndex}`}>
+          {t(`comment${commentIndex}`)}
         </span>
+        <p
+          style={css`
+            text-align: center;
+          `}
+        >
+          <Link
+            style={css`
+              color: cornflowerblue;
+            `}
+            href={`/game/${data.productID}`}
+          >
+            {t("read-more")}
+          </Link>
+        </p>
       </section>
     </div>
   );
