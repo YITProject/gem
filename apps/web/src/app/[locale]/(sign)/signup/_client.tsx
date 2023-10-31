@@ -3,7 +3,7 @@ import { createRef } from "react";
 import { BaseButton, LabelInput, BaseForm } from "godown/react";
 import { useTranslations } from "next-intl";
 import { type BaseForm as BaseFormType } from "godown";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useUserState } from "../../../../state";
 import { testEmail, testNamespace, sha1 } from "../../../../common";
 import alert from "../../../../hooks/alert";
@@ -13,7 +13,7 @@ export default function Signup() {
   const t = useTranslations("(sign)");
   const w = useTranslations("(warn)");
   const loadJWT = useUserState((s) => s.loadJWT);
-
+  const router = useRouter();
   const submit = () => {
     if (!ref.current) {
       return;
@@ -53,7 +53,7 @@ export default function Signup() {
         if (token) {
           loadJWT(token, true);
         }
-        redirect(to || "/");
+        router.replace(to || "/");
       });
   };
   return (

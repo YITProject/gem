@@ -4,7 +4,7 @@ import { type BaseForm as BaseFormType } from "godown";
 import { LabelInput, BaseButton, BaseForm } from "godown/react";
 import { useTranslations } from "next-intl";
 import { type Metadata } from "next";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { css } from "powerstyl";
 import { useUserState } from "../../../../state";
 import { testEmail, testNamespace, sha1 } from "../../../../common";
@@ -20,6 +20,7 @@ export default function Login() {
   const t = useTranslations("(sign)");
   const w = useTranslations("(wrong)");
   const loadJWT = useUserState((s) => s.loadJWT);
+  const router = useRouter();
   const submit = () => {
     if (!ref.current) {
       return;
@@ -68,7 +69,7 @@ export default function Login() {
         if (token) {
           loadJWT(token, true);
         }
-        redirect(to || "/");
+        router.replace(to || "/");
       })
       .catch(() => {
         alert({

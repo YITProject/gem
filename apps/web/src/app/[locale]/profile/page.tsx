@@ -1,5 +1,6 @@
 "use client";
 import { AvatarAnchor, BaseButton } from "godown/react";
+import { redirect } from "next/navigation";
 import { useUserState } from "../../../state";
 import { SetSubhead } from "../../../hooks/subhead";
 import cls from "./page.module.css";
@@ -7,6 +8,10 @@ import cls from "./page.module.css";
 export default function Profile() {
   const data = useUserState((s) => s.data);
   const logout = useUserState((s) => s.logout);
+  const isLogin = useUserState((s) => s.isLogin);
+  if (!isLogin) {
+    redirect("/login");
+  }
   SetSubhead("Profile");
   if (!data) {
     return null;
@@ -18,7 +23,7 @@ export default function Profile() {
 
   return (
     <div className={cls.container}>
-      <AvatarAnchor className={cls.avatar} name={name} src={data.avatarURL!} />
+      <AvatarAnchor className={cls.avatar} name={name} src={data.avatarURL} />
 
       <h2>{name}</h2>
 

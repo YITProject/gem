@@ -27,10 +27,9 @@ export default function User({
     return <Loading />;
   }
   const name = data.displayName || data.namespace;
-  SetSubhead(name);
   return (
     <div className={cls.container}>
-      <AvatarAnchor className={cls.avatar} name={name} src={data.avatarURL!} />
+      <AvatarAnchor className={cls.avatar} name={name} src={data.avatarURL} />
 
       <h2>{name}</h2>
 

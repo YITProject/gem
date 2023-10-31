@@ -43,7 +43,6 @@ export default function RootLayout({ children }) {
               href="/profile"
               style={css`
                 display: flex;
-                align-items: center;
               `}
             >
               <AvatarAnchor name={name()!} />

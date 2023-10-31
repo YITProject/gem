@@ -14,6 +14,7 @@ export default function Rotation(props: { data: Product[] }) {
         width: 840px;
         border-radius: 1em;
         overflow: hidden;
+        margin: 1em auto;
       `}
     >
       {props.data.map((product) => {
@@ -66,19 +67,19 @@ function Details({ data }: { data: Product }) {
         </div>
       </section>
       <section>
-        <p>
+        <div>
           {t("developers")}:<Text>{data.deverlopers.join(", ")}</Text>
-        </p>
-        <p>
+        </div>
+        <div>
           {t("issuers")}:<Text>{data.issuers.join(", ")}</Text>
-        </p>
-        <p>
+        </div>
+        <div>
           {t("comment-rate")}:<Text>{(data.comment * 100).toFixed()}%</Text>
-        </p>
+        </div>
         <span className={`comment-${commentIndex}`}>
           {t(`comment${commentIndex}`)}
         </span>
-        <p
+        <div
           style={css`
             text-align: center;
           `}
@@ -91,7 +92,7 @@ function Details({ data }: { data: Product }) {
           >
             {t("read-more")}
           </Link>
-        </p>
+        </div>
       </section>
     </div>
   );

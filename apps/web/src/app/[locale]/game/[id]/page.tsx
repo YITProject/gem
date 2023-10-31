@@ -55,7 +55,7 @@ export default function Game({
       />
       <AvatarAnchor
         name={data.name}
-        src={data.iconURL!}
+        src={data.iconURL}
         style={css`
           font-size: 3em;
         `}
@@ -63,14 +63,14 @@ export default function Game({
       <h1>{data.name}</h1>
       <Author authorID={data.authorID} />
 
-      <p>开发商: {data.deverlopers[0]}</p>
-      <p>发行商: {data.issuers[0]}</p>
-      <p>
+      <div>开发商: {data.deverlopers[0]}</div>
+      <div>发行商: {data.issuers[0]}</div>
+      <div>
         标签:{" "}
         {data.labels.map((label) => (
           <div key={label}>{l(label)}</div>
         ))}
-      </p>
+      </div>
       <div
         style={css`
           display: flex;
@@ -121,7 +121,7 @@ function Author({ authorID }: { authorID: string }) {
         </h3>
         <AvatarAnchor
           name={name}
-          src={data.avatarURL!}
+          src={data.avatarURL}
           style={css`
             border-radius: 25%;
             background: var(--godown--nav-background);
