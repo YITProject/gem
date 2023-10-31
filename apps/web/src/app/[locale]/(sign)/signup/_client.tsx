@@ -53,7 +53,7 @@ export default function Signup() {
         if (token) {
           loadJWT(token, true);
         }
-        router.replace(to || "/");
+        router.push(to || "/");
       });
   };
   return (

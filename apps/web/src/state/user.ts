@@ -49,14 +49,7 @@ const init = (set, get) => {
       }
       return null;
     },
-    loadJWT(token?: string, autosave = true) {
-      if (!token) {
-        token = localStorage.getItem("TOKEN")!;
-        if (!token) {
-          window.location.href = `/login`;
-          return;
-        }
-      }
+    loadJWT(token: string, autosave = true) {
       const data = decode(token) as null | User;
       if (data) {
         states.login(data);

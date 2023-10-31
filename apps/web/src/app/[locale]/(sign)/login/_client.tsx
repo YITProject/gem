@@ -69,7 +69,7 @@ export default function Login() {
         if (token) {
           loadJWT(token, true);
         }
-        router.replace(to || "/");
+        router.push(to || "/");
       })
       .catch(() => {
         alert({
