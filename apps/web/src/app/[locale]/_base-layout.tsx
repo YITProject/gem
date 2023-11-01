@@ -20,6 +20,7 @@ export default function RootLayout({ children }) {
   const name = useUserState((s) => s.name);
   const load = useUserState((s) => s.load);
   const isLogin = useUserState((s) => s.isLogin);
+  const userData = useUserState(s => s.data);
   useEffect(() => {
     load();
   }, [load]);
@@ -45,7 +46,7 @@ export default function RootLayout({ children }) {
                 display: flex;
               `}
             >
-              <AvatarAnchor name={name()!} />
+              <AvatarAnchor name={name()!} src={userData?.avatarURL} />
               {name()}
             </Link>
           ) : (

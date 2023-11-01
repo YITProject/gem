@@ -37,7 +37,6 @@ const init = (set, get) => {
       });
     },
 
-    //
     load() {
       const token = localStorage.getItem("TOKEN");
       if (token) {
@@ -58,6 +57,9 @@ const init = (set, get) => {
         localStorage.setItem("TOKEN", token);
       }
     },
+    getToken() {
+      return localStorage.getItem("TOKEN");
+    }
   };
   return states;
 };

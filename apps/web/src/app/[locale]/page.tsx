@@ -6,7 +6,7 @@ import type { Product } from "@prisma/client";
 import Rotation from "../../components/rotation";
 
 export default function Page(): JSX.Element | null {
-  const { data, error, isLoading } = useSWR<{ products: Product[] }>(
+  const { data, error, isLoading } = useSWR<{ products: Product[]; }>(
     "/api/hot",
     (url: string) => fetch(url).then((res) => res.json()),
   );

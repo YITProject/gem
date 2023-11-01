@@ -54,6 +54,7 @@ export default function Signup() {
           loadJWT(token, true);
         }
         router.push(to || "/");
+        
       });
   };
   return (

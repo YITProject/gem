@@ -1,5 +1,5 @@
 "use client";
-import type { Product, User } from "@prisma/client";
+import type { Cart, Product, User } from "@prisma/client";
 import { notFound } from "next/navigation";
 import useSWR from "swr";
 import Loading from "ui/logo/loading";
@@ -7,16 +7,70 @@ import { css } from "powerstyl";
 import { AvatarAnchor, BaseButton } from "godown/react";
 import Link from "next-intl/link";
 import { useTranslations } from "next-intl";
+import type { MouseEventHandler } from "react";
+import { useEffect, useState } from "react";
+import { useUserState } from "../../../../state/user";
 
 const fetcher = (url: RequestInfo | URL) =>
   fetch(url).then((res) => res.json());
 export default function Game({
   params,
 }: {
-  params: { locale: string; id: string };
+  params: { locale: string; id: string; };
 }) {
-  const t = useTranslations("(global)");
   const l = useTranslations("(labels)");
+  const userState = useUserState();
+
+  const [carts, setCarts] = useState<(Cart & { Product: Product; })[]>();
+  const UpdateCarts = (pid: string, count = 1) => {
+    const token = userState.getToken();
+    if (token) {
+      void fetch("/api/cart", {
+        method: "put",
+        headers: {
+          TOKEN: token
+        },
+        body: JSON.stringify({
+          productID: pid,
+          count,
+        })
+      });
+
+
+    }
+  };
+  const ClearCarts = (pid: string) => {
+    const token = userState.getToken();
+    if (token) {
+      void fetch("/api/cart", {
+        method: "delete",
+        headers: {
+          TOKEN: token
+        },
+        body: JSON.stringify({
+          productID: pid,
+        })
+      });
+    }
+  };
+  const getCart = () => {
+    const token = userState.getToken();
+    if (token) {
+      void fetch("/api/cart", {
+        method: "get",
+        headers: {
+          TOKEN: token
+        },
+      }).then(res => res.json()).then((fd: (Cart & { Product: Product; })[]) => {
+        setCarts(fd);
+      });
+    }
+  };
+  useEffect(() => {
+    getCart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userState]);
+
   const { id } = params;
   const { data, error, isLoading } = useSWR<Product | null>(
     `/api/game/${id}`,
@@ -79,15 +133,35 @@ export default function Game({
         `}
       >
         <h2>${data.price.valueOf()}</h2>
-        <BaseButton color="blue">
-          <span>{t("add-cart")}</span>
-        </BaseButton>
+        <CartButton carts={carts} id={id} onAdd={() => {
+          UpdateCarts(id, 1);
+        }} onDel={() => { ClearCarts(id); }} />
       </div>
     </div>
   );
 }
 
-function Author({ authorID }: { authorID: string }) {
+function CartButton({ carts, id, onAdd, onDel }: { carts?: (Cart & { Product: Product; })[]; id: string; onAdd?: MouseEventHandler, onDel?: MouseEventHandler; }) {
+  const [exist, setExist] = useState(Boolean(carts?.find((cart) => cart.Product.productID === id)));
+
+  const t = useTranslations("(global)");
+  const handelClick = () => {
+    if (exist) {
+      setExist(false);
+      return onDel;
+    }
+    setExist(true);
+    return onAdd;
+  };
+
+  return <div>
+    <BaseButton color={exist ? "red" : "blue"} onClick={handelClick} >
+      <span>{t(`${exist ? "del" : "add"}-cart`)}</span>
+    </BaseButton>
+  </div>;
+}
+
+function Author({ authorID }: { authorID: string; }) {
   const { data, error } = useSWR<User | null>(`/api/user/${authorID}`, fetcher);
   if (error) {
     return notFound();

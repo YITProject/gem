@@ -85,10 +85,10 @@ function Details({ data }: { data: Product }) {
           `}
         >
           <Link
+            href={`/game/${data.productID}`}
             style={css`
               color: cornflowerblue;
             `}
-            href={`/game/${data.productID}`}
           >
             {t("read-more")}
           </Link>

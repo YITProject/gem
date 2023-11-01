@@ -13,7 +13,9 @@
     "account": "Account",
     "namespace": "Namespace",
     "submit": "Submit",
-    "password-verify": "Password Verify"
+    "password-verify": "Password Verify",
+    "joinedat": "Joined at",
+    "location": "Location"
   },
   "(global)": {
     "ua": "User Arguments",
@@ -27,6 +29,7 @@
     "comment5": "Overwhelmingly positive",
     "comment-rate": "Comment rate",
     "add-cart": "Add to cart",
+    "del-cart": "Remove from cart",
     "read-more": "Read more"
   },
   "(labels)": {

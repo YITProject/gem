@@ -58,13 +58,13 @@ model Item {
 
 // 购物车内容
 model Cart {
-  cardID String @id @default(cuid())
+  cartID String @id @default(cuid())
 
   user   User   @relation(fields: [userID], references: [userID])
   userID String
 
   Product   Product? @relation(fields: [productID], references: [productID])
-  productID String?
+  productID String? 
 
   count Int @default(1)
 }

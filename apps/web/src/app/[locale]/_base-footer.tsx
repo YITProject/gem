@@ -1,5 +1,5 @@
 "use client";
-import { FlexFlow } from "godown/react";
+import { FlexFlow, TimeBar } from "godown/react";
 import Logo from "ui/logo/gemgames";
 import Link from "next-intl/link";
 import { css } from "powerstyl";
@@ -164,12 +164,11 @@ export default function BaseFooter() {
         <a
           href="https://github.com/YITProject/gem"
           style={css`
-            display: flex;
-            justify-content: center;
-            margin: 8px;
+            margin: .5pc auto;
+            width: fit-content;
           `}
         >
-          &copy;{new Date().getFullYear()} GemGames
+          &copy;<TimeBar format="YYYY " />GemGames
         </a>
         <section />
       </FlexFlow>

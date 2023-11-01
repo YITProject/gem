@@ -1,9 +1,10 @@
 "use client";
 import type { User } from "@prisma/client";
-import { AvatarAnchor } from "godown/react";
+import { AvatarAnchor, TimeBar } from "godown/react";
 import { notFound } from "next/navigation";
 import useSWR from "swr";
 import Loading from "ui/logo/loading";
+import { useTranslations } from "next-intl";
 import { SetSubhead } from "../../../../hooks/subhead";
 import cls from "./page.module.css";
 
@@ -12,8 +13,10 @@ const fetcher = (url: RequestInfo | URL) =>
 export default function User({
   params,
 }: {
-  params: { locale: string; ns: string };
+  params: { locale: string; ns: string; };
 }) {
+  SetSubhead("User");
+  const t = useTranslations("(sign)");
   const { ns } = params;
   const { data, error, isLoading } = useSWR<User | null>(
     `/api/user/${ns}?ns`,
@@ -33,10 +36,10 @@ export default function User({
 
       <h2>{name}</h2>
 
-      <p>地区:{data.location}</p>
+      <p>{t("location")}:{data.location}</p>
       <p>
-        加入自
-        {new Date(data.createdAt).toLocaleDateString()}
+        {t("joinedat")}
+        <TimeBar format="YYYY-MM-DD" time={new Date(data.createdAt)} />
       </p>
     </div>
   );

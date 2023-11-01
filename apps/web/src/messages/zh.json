@@ -13,7 +13,9 @@
     "account": "账号",
     "namespace": "命名空间",
     "submit": "提交",
-    "password-verify": "确认密码"
+    "password-verify": "确认密码",
+    "joinedat": "加入自",
+    "location": "地区"
   },
   "(global)": {
     "ua": "用户协议",
@@ -27,6 +29,7 @@
     "comment5": "好评如潮",
     "comment-rate": "好评率",
     "add-cart": "加入购物车",
+    "del-cart": "从购物车移除",
     "read-more": "获取详情"
   },
   "(labels)": {
