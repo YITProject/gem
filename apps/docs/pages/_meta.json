@@ -3,6 +3,8 @@
   "getting-started": "快速开始",
   "authors": "参与人员名单",
   "auth": "身份认证",
+  "components-styles": "组件与样式",
+  "reference": "Api 参考",
   "pp": {
     "title": "隐私政策",
     "type": "page",

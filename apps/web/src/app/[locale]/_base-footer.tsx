@@ -25,7 +25,7 @@ const footerLinks = [
     ],
   },
   {
-    title: "Framwork",
+    title: "Framework",
     list: [
       {
         text: "Next.js",

@@ -25,7 +25,7 @@ const logos: {
   },
   {
     compoent: <h1>Goup</h1>,
-    name: "Go Web Framwork",
+    name: "Go Web Framework",
     href: "https://github.com/startracex/goup",
   },
   {

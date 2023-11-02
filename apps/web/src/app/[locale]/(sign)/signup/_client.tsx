@@ -4,11 +4,11 @@ import { BaseButton, LabelInput, BaseForm } from "godown/react";
 import { useTranslations } from "next-intl";
 import { type BaseForm as BaseFormType } from "godown";
 import { useRouter } from "next/navigation";
+import { css } from "powerstyl";
+import Link from "next-intl/link";
 import { useUserState } from "../../../../state";
 import { testEmail, testNamespace, sha1 } from "../../../../common";
 import alert from "../../../../hooks/alert";
-import { css } from "powerstyl";
-import Link from "next-intl/link";
 
 export default function Signup() {
   const ref = createRef<BaseFormType>();
