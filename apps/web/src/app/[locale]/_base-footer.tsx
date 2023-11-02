@@ -163,7 +163,7 @@ export default function BaseFooter() {
             );
           })}
         </FlexFlow>
-        <FlexFlow
+        <FlexFlow flexflow="column"
           style={css`
             align-items: center;
           `}
@@ -171,8 +171,8 @@ export default function BaseFooter() {
           {i18n.locales.map((locale) => {
             return (
               <Link
-                key={locale}
                 href={locale}
+                key={locale}
                 locale={locale}
                 style={css`
                   margin-bottom: 6px;

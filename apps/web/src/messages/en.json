@@ -21,8 +21,8 @@
   "(global)": {
     "ua": "User Arguments",
     "pp": "Privact policy",
-    "developer": "Developer",
-    "issue": "Issue",
+    "developers": "Developers",
+    "issuers": "Issuers",
     "comment1": "Overwhelmingly negative",
     "comment2": "Mostly negative",
     "comment3": "Average",
