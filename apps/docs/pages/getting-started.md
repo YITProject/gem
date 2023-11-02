@@ -2,7 +2,7 @@
 
 ## 设置域名配置
 
-apps/reverse-server是一个反代服务器, 他现在具有这些反代规则
+apps/reverse-server是一个反代服务器, 它现在具有这些反代规则
 
 ```txt
   example.com/ => localhost:3000
@@ -37,6 +37,6 @@ pnpm run db:stdio #这将启动Prisma网页视图
 
 ### 连接数据库
 
-`apps/sign` 需要Mongodb与Redis, 它们的链接设置位于`databases/instanses.go`
+`apps/sign` 需要Mongodb与Redis, 它们的链接设置位于 `databases/instanses.go`
 
-`apps/web` 需要PostgreSQL.也可更换为MySQL, SqlServer, SQLite. 它的连接配置位于`prisma/schema.prisma` (参阅 [Prisma](https://pris.ly/d/prisma-schema))
+`apps/web` 需要PostgreSQL.也可更换为MySQL, SqlServer, SQLite. 它的连接配置位于 `prisma/schema.prisma` (参阅 [Prisma](https://pris.ly/d/prisma-schema))

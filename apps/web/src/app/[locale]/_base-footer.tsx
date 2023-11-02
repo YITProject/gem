@@ -4,6 +4,7 @@ import Logo from "ui/logo/gemgames";
 import Link from "next-intl/link";
 import { css } from "powerstyl";
 import { useTranslations } from "next-intl";
+import { i18n } from "../../../next.config";
 
 const footerLinks = [
   {
@@ -60,6 +61,7 @@ const footerLinks = [
 ];
 export default function BaseFooter() {
   const t = useTranslations("(global)");
+
   return (
     <footer
       slot="footer"
@@ -95,7 +97,7 @@ export default function BaseFooter() {
             </Link>
           </div>
 
-          <div
+          <FlexFlow
             style={css`
               margin: 0.5em;
             `}
@@ -122,7 +124,7 @@ export default function BaseFooter() {
                 </a>
               );
             })}
-          </div>
+          </FlexFlow>
         </FlexFlow>
         <FlexFlow
           className="col-m"
@@ -161,14 +163,38 @@ export default function BaseFooter() {
             );
           })}
         </FlexFlow>
+        <FlexFlow
+          style={css`
+            align-items: center;
+          `}
+        >
+          {i18n.locales.map((locale) => {
+            return (
+              <Link
+                key={locale}
+                href={locale}
+                locale={locale}
+                style={css`
+                  margin-bottom: 6px;
+                  color: #e1e1e1;
+                `}
+              >
+                {i18n.summary[locale]}
+              </Link>
+            );
+          })}
+        </FlexFlow>
+
         <a
           href="https://github.com/YITProject/gem"
           style={css`
-            margin: .5pc auto;
+            margin: 0.5pc auto;
             width: fit-content;
           `}
         >
-          &copy;<TimeBar format="YYYY " />GemGames
+          &copy;
+          <TimeBar format="YYYY " />
+          GemGames
         </a>
         <section />
       </FlexFlow>

@@ -7,4 +7,8 @@ export const i18n = {
   locales,
   defaultLocale: locales[0],
   params: locales.map((locale) => ({ locale })),
+  summary: {
+    en: "English",
+    zh: "简体中文",
+  },
 };
