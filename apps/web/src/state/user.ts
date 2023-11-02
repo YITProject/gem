@@ -29,7 +29,7 @@ const init = (set, get) => {
 
     // 登出
     logout() {
-      localStorage.removeItem("TOKEN")
+      localStorage.removeItem("TOKEN");
       set(() => {
         return {
           data: null,
@@ -60,7 +60,7 @@ const init = (set, get) => {
     },
     getToken() {
       return localStorage.getItem("TOKEN");
-    }
+    },
   };
   return states;
 };

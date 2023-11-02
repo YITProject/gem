@@ -163,7 +163,8 @@ export default function BaseFooter() {
             );
           })}
         </FlexFlow>
-        <FlexFlow flexflow="column"
+        <FlexFlow
+          flexflow="column"
           style={css`
             align-items: center;
           `}

@@ -95,7 +95,7 @@ export const DELETE = async (res: Request) => {
       cartID: findCart?.cartID,
     },
   });
-  
+
   return NextResponse.json(updatedCart);
 };
 

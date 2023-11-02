@@ -11,7 +11,7 @@ export default function Rotation(props: { data: Product[] }) {
   return (
     <RotationPool
       style={css`
-        width: 840px;
+        width: 920px;
         border-radius: 1em;
         overflow: hidden;
         margin: 1em auto;

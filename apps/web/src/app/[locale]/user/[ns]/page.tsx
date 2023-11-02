@@ -13,7 +13,7 @@ const fetcher = (url: RequestInfo | URL) =>
 export default function User({
   params,
 }: {
-  params: { locale: string; ns: string; };
+  params: { locale: string; ns: string };
 }) {
   SetSubhead("User");
   const t = useTranslations("(sign)");
@@ -36,7 +36,9 @@ export default function User({
 
       <h2>{name}</h2>
 
-      <p>{t("location")}:{data.location}</p>
+      <p>
+        {t("location")}:{data.location}
+      </p>
       <p>
         {t("joinedat")}
         <TimeBar format="YYYY-MM-DD" time={new Date(data.createdAt)} />

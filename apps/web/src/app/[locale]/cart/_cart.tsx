@@ -16,19 +16,19 @@ font-style: normal;
 }`;
 export default function Cart() {
   const userState = useUserState();
-  const [carts, setCarts] = useState<(Cart & { Product: Product; })[]>();
+  const [carts, setCarts] = useState<(Cart & { Product: Product })[]>();
   const UpdateCarts = (pid: string, count = 1) => {
     const token = userState.getToken();
     if (token) {
       void fetch("/api/cart", {
         method: "put",
         headers: {
-          TOKEN: token
+          TOKEN: token,
         },
         body: JSON.stringify({
           productID: pid,
           count,
-        })
+        }),
       });
     }
   };
@@ -38,11 +38,11 @@ export default function Cart() {
       void fetch("/api/cart", {
         method: "delete",
         headers: {
-          TOKEN: token
+          TOKEN: token,
         },
         body: JSON.stringify({
           productID: pid,
-        })
+        }),
       });
     }
   };
@@ -52,11 +52,13 @@ export default function Cart() {
       void fetch("/api/cart", {
         method: "get",
         headers: {
-          TOKEN: token
+          TOKEN: token,
         },
-      }).then(res => res.json()).then((fd: (Cart & { Product: Product; })[]) => {
-        setCarts(fd);
-      });
+      })
+        .then((res) => res.json())
+        .then((fd: (Cart & { Product: Product })[]) => {
+          setCarts(fd);
+        });
     }
   };
   const add = (productID: string) => {

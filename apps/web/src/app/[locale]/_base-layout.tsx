@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
   const name = useUserState((s) => s.name);
   const load = useUserState((s) => s.load);
   const isLogin = useUserState((s) => s.isLogin);
-  const userData = useUserState(s => s.data);
+  const userData = useUserState((s) => s.data);
   useEffect(() => {
     load();
   }, [load]);
