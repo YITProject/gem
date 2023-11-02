@@ -81,14 +81,21 @@ export const DELETE = async (res: Request) => {
   if (!obj || typeof obj !== "object") {
     return ResponseEmpty();
   }
+
   const { userID } = obj as User;
 
-  const updatedCart = await db.cart.deleteMany({
+  const findCart = await db.cart.findFirst({
     where: {
       productID,
       userID,
     },
   });
+  const updatedCart = await db.cart.delete({
+    where: {
+      cartID: findCart?.cartID,
+    },
+  });
+  
   return NextResponse.json(updatedCart);
 };
 

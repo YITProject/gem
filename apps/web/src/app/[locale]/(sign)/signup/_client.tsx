@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import { useUserState } from "../../../../state";
 import { testEmail, testNamespace, sha1 } from "../../../../common";
 import alert from "../../../../hooks/alert";
+import { css } from "powerstyl";
+import Link from "next-intl/link";
 
 export default function Signup() {
   const ref = createRef<BaseFormType>();
@@ -54,7 +56,6 @@ export default function Signup() {
           loadJWT(token, true);
         }
         router.push(to || "/");
-        
       });
   };
   return (
@@ -69,9 +70,26 @@ export default function Signup() {
           type="password"
         />
       </BaseForm>
-      <BaseButton onClick={submit}>
-        <span>{t("submit")}</span>
-      </BaseButton>
+      <div
+        style={css`
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        `}
+      >
+        <BaseButton onClick={submit}>
+          <span>{t("submit")}</span>
+        </BaseButton>
+        <Link href="/login">
+          <BaseButton
+            style={css`
+              margin: 0.5em;
+            `}
+          >
+            <span>{t("login")}</span>
+          </BaseButton>
+        </Link>
+      </div>
     </div>
   );
 }

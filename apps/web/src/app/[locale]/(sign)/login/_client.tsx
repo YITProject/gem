@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { type Metadata } from "next";
 import { useRouter } from "next/navigation";
 import { css } from "powerstyl";
+import Link from "next-intl/link";
 import { useUserState } from "../../../../state";
 import { testEmail, testNamespace, sha1 } from "../../../../common";
 import { SetSubhead } from "../../../../hooks/subhead";
@@ -65,7 +66,7 @@ export default function Login() {
     })
       .then((res) => res.json())
       .then((jsondata) => {
-        const { token, to } = jsondata as { token: string; to?: string; };
+        const { token, to } = jsondata as { token: string; to?: string };
         if (token) {
           loadJWT(token, true);
         }
@@ -107,6 +108,7 @@ export default function Login() {
         style={css`
           display: flex;
           justify-content: center;
+          align-items: center;
         `}
       >
         <BaseButton
@@ -117,6 +119,15 @@ export default function Login() {
         >
           <span>{t("submit")}</span>
         </BaseButton>
+        <Link href="/signup">
+          <BaseButton
+            style={css`
+              margin: 0.5em;
+            `}
+          >
+            <span>{t("signup")}</span>
+          </BaseButton>
+        </Link>
       </div>
       <div
         style={css`

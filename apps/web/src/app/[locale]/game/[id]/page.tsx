@@ -7,36 +7,34 @@ import { css } from "powerstyl";
 import { AvatarAnchor, BaseButton } from "godown/react";
 import Link from "next-intl/link";
 import { useTranslations } from "next-intl";
-import type { MouseEventHandler } from "react";
 import { useEffect, useState } from "react";
 import { useUserState } from "../../../../state/user";
+import CartA from "../../../../components/carta";
 
 const fetcher = (url: RequestInfo | URL) =>
   fetch(url).then((res) => res.json());
 export default function Game({
   params,
 }: {
-  params: { locale: string; id: string; };
+  params: { locale: string; id: string };
 }) {
   const l = useTranslations("(labels)");
   const userState = useUserState();
 
-  const [carts, setCarts] = useState<(Cart & { Product: Product; })[]>();
+  const [carts, setCarts] = useState<(Cart & { Product: Product })[]>();
   const UpdateCarts = (pid: string, count = 1) => {
     const token = userState.getToken();
     if (token) {
       void fetch("/api/cart", {
         method: "put",
         headers: {
-          TOKEN: token
+          TOKEN: token,
         },
         body: JSON.stringify({
           productID: pid,
           count,
-        })
+        }),
       });
-
-
     }
   };
   const ClearCarts = (pid: string) => {
@@ -45,11 +43,11 @@ export default function Game({
       void fetch("/api/cart", {
         method: "delete",
         headers: {
-          TOKEN: token
+          TOKEN: token,
         },
         body: JSON.stringify({
           productID: pid,
-        })
+        }),
       });
     }
   };
@@ -59,11 +57,13 @@ export default function Game({
       void fetch("/api/cart", {
         method: "get",
         headers: {
-          TOKEN: token
+          TOKEN: token,
         },
-      }).then(res => res.json()).then((fd: (Cart & { Product: Product; })[]) => {
-        setCarts(fd);
-      });
+      })
+        .then((res) => res.json())
+        .then((fd: (Cart & { Product: Product })[]) => {
+          setCarts(fd);
+        });
     }
   };
   useEffect(() => {
@@ -133,35 +133,60 @@ export default function Game({
         `}
       >
         <h2>${data.price.valueOf()}</h2>
-        <CartButton carts={carts} id={id} onAdd={() => {
-          UpdateCarts(id, 1);
-        }} onDel={() => { ClearCarts(id); }} />
+        <CartButton
+          carts={carts}
+          id={id}
+          onAdd={() => {
+            UpdateCarts(id, 1);
+          }}
+          onDel={() => {
+            ClearCarts(id);
+          }}
+        />
       </div>
+      <CartA />
     </div>
   );
 }
 
-function CartButton({ carts, id, onAdd, onDel }: { carts?: (Cart & { Product: Product; })[]; id: string; onAdd?: MouseEventHandler, onDel?: MouseEventHandler; }) {
-  const [exist, setExist] = useState(Boolean(carts?.find((cart) => cart.Product.productID === id)));
+function CartButton({
+  carts,
+  id,
+  onAdd,
+  onDel,
+}: {
+  carts?: (Cart & { Product: Product })[];
+  id: string;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  onAdd?: Function;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  onDel?: Function;
+}) {
+  const [exist, setExist] = useState(
+    Boolean(carts?.find((cart) => cart.Product.productID === id)),
+  );
 
   const t = useTranslations("(global)");
   const handelClick = () => {
     if (exist) {
       setExist(false);
-      return onDel;
+      onDel?.();
+    } else {
+      setExist(true);
+      onAdd?.();
     }
-    setExist(true);
-    return onAdd;
   };
 
-  return <div>
-    <BaseButton color={exist ? "red" : "blue"} onClick={handelClick} >
-      <span>{t(`${exist ? "del" : "add"}-cart`)}</span>
-    </BaseButton>
-  </div>;
+  return (
+    <div>
+      <BaseButton color={exist ? "red" : "blue"} onClick={handelClick}>
+        <span>{t(`${exist ? "del" : "add"}-cart`)}</span>
+      </BaseButton>
+    </div>
+  );
 }
 
-function Author({ authorID }: { authorID: string; }) {
+function Author({ authorID }: { authorID: string }) {
   const { data, error } = useSWR<User | null>(`/api/user/${authorID}`, fetcher);
   if (error) {
     return notFound();

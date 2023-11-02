@@ -91,49 +91,83 @@ export default function Cart() {
   if (!carts?.length) {
     return <>Nothing</>;
   }
-  return <div style={css`
-    width: 340px;
-    padding: 1em;
-    background: var(--godown--nav-background);
-    border-radius: 1em;`}>
-    {carts.map(cart => {
-      return <div key={cart.cartID} style={css`
-          margin: 12px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          `}>
-        <section style={css`
-        margin-bottom: 12px;
-        justify-content: space-between;
-        align-items: center;
-        display: flex;
-        width: 100%;
-        `}>
-          <AvatarAnchor name={cart.Product.name} src={cart.Product.iconURL} style={css`
-            font-size: 2em;
-        `} />
-          <div>{cart.Product.name}</div>
-        </section>
-        <section style={css`
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 10pc;
-        margin: auto;`}>
-          <BaseButton color="red" onClick={() => { del(cart.productID!); }} style={css`width:1.6em;height:1.6em;`}>
-            <I>
-              -
-            </I>
-          </BaseButton>
-          <div>{cart.count}</div>
-          <BaseButton color="blue" onClick={() => { add(cart.productID!); }} style={css`width:1.6em;height:1.6em;`}>
-            <I>
-              +
-            </I>
-          </BaseButton>
-        </section>
-      </div>;
-    })}
-  </div>;
+  return (
+    <div
+      style={css`
+        width: 340px;
+        margin: 2em;
+        padding: 1em;
+        background: var(--godown--nav-background);
+        border-radius: 1em;
+      `}
+    >
+      {carts.map((cart) => {
+        return (
+          <div
+            key={cart.cartID}
+            style={css`
+              margin: 12px;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+            `}
+          >
+            <section
+              style={css`
+                margin-bottom: 12px;
+                justify-content: space-between;
+                align-items: center;
+                display: flex;
+                width: 100%;
+              `}
+            >
+              <AvatarAnchor
+                name={cart.Product.name}
+                src={cart.Product.iconURL}
+                style={css`
+                  font-size: 2em;
+                `}
+              />
+              <div>{cart.Product.name}</div>
+            </section>
+            <section
+              style={css`
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 10pc;
+                margin: auto;
+              `}
+            >
+              <BaseButton
+                color="red"
+                onClick={() => {
+                  del(cart.productID!);
+                }}
+                style={css`
+                  width: 1.6em;
+                  height: 1.6em;
+                `}
+              >
+                <I>-</I>
+              </BaseButton>
+              <div>{cart.count}</div>
+              <BaseButton
+                color="blue"
+                onClick={() => {
+                  add(cart.productID!);
+                }}
+                style={css`
+                  width: 1.6em;
+                  height: 1.6em;
+                `}
+              >
+                <I>+</I>
+              </BaseButton>
+            </section>
+          </div>
+        );
+      })}
+    </div>
+  );
 }

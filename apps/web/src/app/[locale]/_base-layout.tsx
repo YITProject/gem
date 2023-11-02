@@ -46,7 +46,13 @@ export default function RootLayout({ children }) {
                 display: flex;
               `}
             >
-              <AvatarAnchor name={name()!} src={userData?.avatarURL} />
+              <AvatarAnchor
+                name={name()!}
+                src={userData?.avatarURL}
+                style={css`
+                  margin-right: 6px;
+                `}
+              />
               {name()}
             </Link>
           ) : (

@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useUserState } from "../../../state";
 import { SetSubhead } from "../../../hooks/subhead";
+import CartA from "../../../components/carta";
 import cls from "./page.module.css";
 
 export default function Profile() {
@@ -35,7 +36,9 @@ export default function Profile() {
 
       <h2>{name}</h2>
 
-      <p>{t("location")}:{data.location}</p>
+      <p>
+        {t("location")}:{data.location}
+      </p>
       <p>
         {t("joinedat")}
         <TimeBar format="YYYY-MM-DD" time={new Date(data.createdAt)} />
@@ -45,7 +48,7 @@ export default function Profile() {
           <span>{t("signout")}</span>
         </BaseButton>
       </p>
-
+      <CartA />
     </div>
   );
 }
