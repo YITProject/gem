@@ -1,19 +1,20 @@
 import { staticStyles } from "../styles/static";
 import origin from "../lib/origin";
-import { RouteView } from "godown";
+import type { HtmlTemplate } from "godown/tmpl";
 import {
   ifDefined,
   customElement,
   property,
-  LitElement,
   html,
+  GlobalSTD,
+  CSSResultGroup,
 } from "godown/deps";
 @customElement("auth-page")
-export class AuthPage extends LitElement {
+export class AuthPage extends GlobalSTD {
   token!: string | null;
   callbackURL!: string | null;
   callbackURLOrigin!: string | null;
-  static styles = staticStyles;
+  static styles = staticStyles as CSSResultGroup;
   @property({ attribute: false }) state: {
     [key: string]: any;
   } | null = null;
@@ -60,11 +61,10 @@ export class AuthPage extends LitElement {
       });
   }
   toLogin() {
-    // we need to change the route-view's path and schedule it's update method `RouteView.updateAll`
+    // we need to change the route-view's path and schedule its update method `RouteView.updateAll`
     history.pushState(null, "", "/login" + window.location.search);
-    RouteView.updateAll();
   }
-  protected render() {
+  render(): HtmlTemplate {
     return html`
       <flex-flow class="wrapper">
         ${this.state

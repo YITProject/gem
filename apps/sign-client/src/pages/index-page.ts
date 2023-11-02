@@ -6,6 +6,7 @@ import {
   css,
 } from "godown/deps";
 import { staticStyles } from "../styles/static";
+import { HtmlTemplate } from "godown/tmpl";
 @customElement("index-page")
 export class IndexPage extends LitElement {
   static styles: CSSResultGroup = [
@@ -17,7 +18,8 @@ export class IndexPage extends LitElement {
       }
     `,
   ];
-  render() {
+
+  render(): HtmlTemplate {
     return html`
       <div class="wrapper">
         <link-a href="/login">Login</link-a>

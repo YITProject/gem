@@ -1,5 +1,6 @@
+import { CSSResultGroup } from "godown/deps";
 import { css } from "lit";
-export const staticStyles = css`
+export const staticStyles = [css`
   :host {
     display: contents;
   }
@@ -25,4 +26,4 @@ export const staticStyles = css`
     justify-content: center;
     flex-direction: column;
   }
-`;
+`] as unknown as CSSResultGroup

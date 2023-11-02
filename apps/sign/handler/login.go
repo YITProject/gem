@@ -35,7 +35,6 @@ func Login(req goup.Request, res goup.Response) {
 		res.Status(500)
 		return
 	}
-
 	res.Status(200)
 	res.JSON(map[string]string{
 		"token": token,

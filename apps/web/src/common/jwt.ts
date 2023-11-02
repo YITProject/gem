@@ -6,13 +6,7 @@ export const defaultSignOption: jwt.SignOptions = {
   algorithm: "HS512",
 };
 export function sign(
-  payload:
-    | string
-    | Buffer
-    | {
-        [key: string]: unknown;
-        password?: string | null | undefined;
-      },
+  payload: string | Buffer | Record<string, unknown>,
   options?: jwt.SignOptions,
 ): string {
   if (typeof payload === "object" && "password" in payload) {

@@ -1,7 +1,7 @@
 "use client";
 import { createRef } from "react";
 import { type BaseForm as BaseFormType } from "godown";
-import { LabelInput, BaseButton, BaseForm } from "godown/react";
+import { LabelInput, BaseButton, BaseForm, FlexFlow } from "godown/react";
 import { useTranslations } from "next-intl";
 import { type Metadata } from "next";
 import { useRouter } from "next/navigation";
@@ -65,7 +65,7 @@ export default function Login() {
     })
       .then((res) => res.json())
       .then((jsondata) => {
-        const { token, to } = jsondata as { token: string; to?: string };
+        const { token, to } = jsondata as { token: string; to?: string; };
         if (token) {
           loadJWT(token, true);
         }
@@ -77,6 +77,9 @@ export default function Login() {
           content: w("server-error"),
         });
       });
+  };
+  const auth = () => {
+    window.location.href = `http://localhost:9527/auth?callback_url=${window.location.host}/auth`;
   };
   return (
     <div>
@@ -100,14 +103,40 @@ export default function Login() {
           </span>
         </LabelInput>
       </BaseForm>
-      <BaseButton
-        onClick={submit}
-        style={css`
+      <div style={css`
+          display: flex;
+          justify-content: center;
+        `}>
+        <BaseButton
+          onClick={submit}
+          style={css`
           margin: 0.5em;
         `}
-      >
-        <span>{t("submit")}</span>
-      </BaseButton>
+        >
+          <span>{t("submit")}</span>
+        </BaseButton>
+      </div>
+      <div style={css`
+          display: flex;
+          justify-content: center;
+          margin: 0.5em;
+        `}>
+        {t("login-auth")}
+      </div>
+      <FlexFlow style={css`
+          justify-content: center;
+          margin: 0.5em;
+        `}>
+        <BaseButton
+          onClick={auth}
+          style={css`
+          margin: 0.5em;
+        `}
+        >
+          <span>Goup-oauth</span>
+        </BaseButton>
+      </FlexFlow>
+
     </div>
   );
 }

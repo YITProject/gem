@@ -4,16 +4,27 @@ import (
 	"fmt"
 	"github.com/startracex/goup"
 	"goupapp/apps/sign/conf"
+	"goupapp/apps/sign/database"
 	"goupapp/apps/sign/router"
 	"goupapp/internal/middleware"
 )
 
 func main() {
 	fmt.Printf("goup@%s: ", goup.Version)
+	database.Init()
 	engine := goup.New()
 	engine.Use(middleware.Recovery(), middleware.SetCors(middleware.DefaultCors))
 	engine.LoadHTMLFiles("client/index.html")
 	engine.GET("/", func(request goup.Request, response goup.Response) {
+		response.HTML("index.html", nil)
+	})
+	engine.GET("/login", func(request goup.Request, response goup.Response) {
+		response.HTML("index.html", nil)
+	})
+	engine.GET("/signup", func(request goup.Request, response goup.Response) {
+		response.HTML("index.html", nil)
+	})
+	engine.GET("/auth", func(request goup.Request, response goup.Response) {
 		response.HTML("index.html", nil)
 	})
 	engine.Public("/public", "./client/public")

@@ -4,6 +4,7 @@
   },
   "(sign)": {
     "login": "登录",
+    "login-auth": "认证登录",
     "register": "注册",
     "signup": "注册",
     "signout": "登出",

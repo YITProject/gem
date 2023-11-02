@@ -4,6 +4,7 @@
   },
   "(sign)": {
     "login": "Login",
+    "login-auth": "Authenticate login",
     "register": "Register",
     "signup": "Signup",
     "signout": "Signout",

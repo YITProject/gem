@@ -1,15 +1,16 @@
-import { customElement, LitElement, html } from "godown/deps";
+import { customElement, html, GlobalSTD, CSSResultGroup } from "godown/deps";
 import { staticStyles } from "../styles/static";
 import origin from "../lib/origin";
 import { testEmail, testPassword } from "../lib/vaild";
 import { sha1 } from "../lib/crypto";
 import { BaseForm, RouteView } from "godown";
+import { HtmlTemplate } from "godown/tmpl";
 @customElement("signup-page")
-export class SignupPage extends LitElement {
-  static styles = staticStyles;
+export class SignupPage extends GlobalSTD {
+  static styles = staticStyles as unknown as CSSResultGroup;
   onSubmit() {
     const f = this.shadowRoot?.querySelector("base-form") as BaseForm;
-    const [name, value] = f.namevalue();
+    const [_, value] = f.namevalue();
     let { email, password } = value;
     if (!testEmail(email)) {
       return;
@@ -18,8 +19,7 @@ export class SignupPage extends LitElement {
       return;
     }
     password = sha1(password);
-    console.log(email, password);
-    fetch(`${origin}/${name}`, {
+    fetch(`${origin}/register`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -38,10 +38,10 @@ export class SignupPage extends LitElement {
       }
     });
   }
-  protected render() {
+  render(): HtmlTemplate {
     return html`
       <flex-flow class="wrapper">
-        <base-form name="register">
+        <base-form>
           <label-input label="E-mail" name="email"></label-input>
           <label-input label="Password" type="password"></label-input>
           <label-input label="Password Verify" type="password"></label-input>

@@ -11,7 +11,7 @@ var RedisCodeMap = db.NewRedisInstance()
 
 var MongoAccount = db.NewMongoInstance()
 
-func _init() {
+func Init() {
 	fmt.Println("Initializing databases")
 	RedisCodeMap.Connect("127.0.0.1:6379", 0)
 	RedisTokenMap.Connect("127.0.0.1:6379", 1)
