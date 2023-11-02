@@ -1,6 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import crypto from "node:crypto";
-import type { Cart, Item, Order, OrderDetails, Password, Product, User } from "@prisma/client";
+import type {
+  Cart,
+  Item,
+  Order,
+  OrderDetails,
+  Password,
+  Product,
+  User,
+} from "@prisma/client";
 import { Prisma, PrismaClient } from "@prisma/client";
 
 export const sha1 = (data: string) => {
@@ -14,14 +22,14 @@ async function createUser(data: Partial<User & Password>) {
   delete data.password;
 
   const user: User = await db.user.create({
-    data: data as User
+    data: data as User,
   });
   if (password) {
     await db.password.create({
       data: {
         userID: user.userID,
-        password: sha1(password)
-      }
+        password: sha1(password),
+      },
     });
   }
   return user;
@@ -35,7 +43,7 @@ void (async () => {
     password: "123",
     location: "ru",
     avatarURL: null,
-    type: "user"
+    type: "user",
   });
   const userExampleB: User = await createUser({
     namespace: "exampleb",
@@ -44,7 +52,7 @@ void (async () => {
     password: "123",
     location: "de",
     avatarURL: null,
-    type: "user"
+    type: "user",
   });
   const userRockstar: User = await createUser({
     namespace: "rockstar",
@@ -53,7 +61,7 @@ void (async () => {
     password: "123",
     location: "uk",
     avatarURL: "/avatar/rockstar.jpg",
-    type: "organization"
+    type: "organization",
   });
   const userEa: User = await createUser({
     namespace: "ea",
@@ -61,7 +69,7 @@ void (async () => {
     password: "123",
     location: "us",
     avatarURL: "/avatar/ea.jpg",
-    type: "organization"
+    type: "organization",
   });
   const userValve: User = await createUser({
     namespace: "valve",
@@ -70,7 +78,7 @@ void (async () => {
     password: "123",
     location: "us",
     avatarURL: "/avatar/valve.jpg",
-    type: "organization"
+    type: "organization",
   });
   const user2k: User = await createUser({
     namespace: "2k",
@@ -79,7 +87,7 @@ void (async () => {
     password: "unset",
     location: "us",
     avatarURL: "/avatar/2k.webp",
-    type: "organization"
+    type: "organization",
   });
   const userInd: User = await createUser({
     namespace: "indienova",
@@ -87,7 +95,7 @@ void (async () => {
     email: "service@indienova.com",
     location: "cn",
     avatarURL: "/avatar/indienova.png",
-    type: "organization"
+    type: "organization",
   });
 
   const prodsMeta: Partial<Product>[] = [
@@ -96,34 +104,34 @@ void (async () => {
       productID: "gta5",
       name: "Grand Theft Auto V",
       authorID: userRockstar.userID,
-      price: new Prisma.Decimal(19),
+      price: new Prisma.Decimal(12.99),
       comment: 0.98,
       labels: ["crime", "open-world", "act"],
       deverlopers: ["Rockstar North"],
       issuers: ["Rockstar Games"],
-      type: "game"
+      type: "game",
     },
     {
       productID: "rdr2",
       name: "Red Dead Redemption 2",
       authorID: userRockstar.userID,
-      price: new Prisma.Decimal(29),
+      price: new Prisma.Decimal(39.99),
       comment: 0.87,
       labels: ["crime", "open-world", "act"],
       deverlopers: ["Rockstar San Diego"],
       issuers: ["Rockstar Games"],
-      type: "game"
+      type: "game",
     },
     {
       productID: "bf5",
       name: "Battlefield 5",
       authorID: userEa.userID,
-      price: new Prisma.Decimal(9),
+      price: new Prisma.Decimal(19.99),
       comment: 0.4,
-      labels: ["fps"],
+      labels: ["fps", "ww2"],
       deverlopers: ["DICE"],
       issuers: ["Electronic Arts"],
-      type: "game"
+      type: "game",
     },
     {
       productID: "cs2",
@@ -134,53 +142,53 @@ void (async () => {
       comment: 0.07,
       deverlopers: ["Valve"],
       issuers: ["Valve"],
-      type: "game"
+      type: "game",
     },
     {
       productID: "nba2k24",
       name: "NBA 2K24",
       authorID: user2k.userID,
-      price: new Prisma.Decimal(39),
+      price: new Prisma.Decimal(27.99),
       labels: ["sports"],
       comment: 0.31,
       deverlopers: ["2K Sports"],
       issuers: ["2K Sports"],
-      type: "game"
+      type: "game",
     },
     {
       productID: "loveisallaround",
       name: "完蛋我被美女包围了",
       authorID: userInd.userID,
       labels: ["sexy", "story"],
-      price: new Prisma.Decimal(6.9),
+      price: new Prisma.Decimal(5.99),
       comment: 0.77,
       deverlopers: ["Intiny"],
       issuers: ["Intiny"],
-      type: "game"
+      type: "game",
     },
     // TODO dlcs
     {
       productID: "nba2k24_dlc_kun",
       name: "NBA Hero Kun",
       authorID: user2k.userID,
-      price: new Prisma.Decimal(9),
+      price: new Prisma.Decimal(25),
       labels: ["sports"],
       comment: 0.99,
       deverlopers: ["2K Sports"],
       issuers: ["2K Sports"],
-      type: "dlc"
+      type: "dlc",
     },
     {
       productID: "nba2k24_dlc_kobe",
       name: "NBA Hero Kobe",
       authorID: user2k.userID,
-      price: new Prisma.Decimal(19),
+      price: new Prisma.Decimal(24),
       labels: ["sports"],
       comment: 0.39,
       deverlopers: ["2K Sports"],
       issuers: ["2K Sports"],
-      type: "dlc"
-    }
+      type: "dlc",
+    },
   ];
 
   const prods: Product[] = prodsMeta.map((prod: Partial<Product>) => {
@@ -192,7 +200,7 @@ void (async () => {
   });
 
   await db.product.createMany({
-    data: prods
+    data: prods,
   });
   const ids = prods
     .filter((prod: Product) => prod.type === "game")
@@ -200,65 +208,65 @@ void (async () => {
 
   await db.productHot.create({
     data: {
-      productIDs: [...ids]
-    }
+      productIDs: [...ids],
+    },
   });
 
   const cartA1: Cart = await db.cart.create({
     data: {
       userID: userExampleA.userID,
       productID: prods[0].productID,
-      count: 1
-    }
+      count: 1,
+    },
   });
   const cartA2: Cart = await db.cart.create({
     data: {
       userID: userExampleA.userID,
       productID: prods[1].productID,
-      count: 1
-    }
+      count: 1,
+    },
   });
   const priceA1: Product = (await db.product.findFirst({
     where: {
-      productID: cartA1.productID!
-    }
+      productID: cartA1.productID!,
+    },
   }))!;
   const priceA2: Product = (await db.product.findFirst({
     where: {
-      productID: cartA2.productID!
-    }
+      productID: cartA2.productID!,
+    },
   }))!;
   const total = priceA1.price.plus(priceA2.price);
   const orderA: Order = await db.order.create({
     data: {
       userID: userExampleA.userID,
-      total
-    }
+      total,
+    },
   });
   const orderDetailsA1: OrderDetails = await db.orderDetails.create({
     data: {
       orderID: orderA.orderID,
-      productID: prods[0].productID
-    }
+      productID: prods[0].productID,
+    },
   });
   const orderDetailsA2: OrderDetails = await db.orderDetails.create({
     data: {
       orderID: orderA.orderID,
-      productID: prods[1].productID
-    }
+      productID: prods[1].productID,
+    },
   });
   const orderAcompleted: Order = await db.order.update({
     where: {
-      orderID: orderA.orderID
+      orderID: orderA.orderID,
     },
     data: {
-      status: "completed"
-    }
+      status: "completed",
+    },
   });
   const orderItems: OrderDetails[] = await db.orderDetails.findMany({
     where: {
-      orderID: orderAcompleted.orderID
-    }
+      orderID: orderAcompleted.orderID,
+    },
   });
 
   const ownerID = orderAcompleted.userID;
@@ -266,8 +274,8 @@ void (async () => {
   const newItems: Item[] = await Promise.all(
     orderItems.map((orderItem: OrderDetails) => {
       return db.item.create({
-        data: { productID: orderItem.productID, ownerID }
+        data: { productID: orderItem.productID, ownerID },
       });
-    })
+    }),
   );
 })();

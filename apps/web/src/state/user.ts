@@ -27,8 +27,9 @@ const init = (set, get) => {
       });
     },
 
-    // 登出, 设置isLogin为false
+    // 登出
     logout() {
+      localStorage.removeItem("TOKEN")
       set(() => {
         return {
           data: null,

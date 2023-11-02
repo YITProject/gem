@@ -79,7 +79,7 @@ export default function Login() {
       });
   };
   const auth = () => {
-    window.location.href = `http://localhost:9527/auth?callback_url=${window.location.host}/auth`;
+    window.location.href = `http://localhost:9527/auth?callback_url=${window.location.origin}/auth`;
   };
   return (
     <div>
@@ -103,40 +103,46 @@ export default function Login() {
           </span>
         </LabelInput>
       </BaseForm>
-      <div style={css`
+      <div
+        style={css`
           display: flex;
           justify-content: center;
-        `}>
+        `}
+      >
         <BaseButton
           onClick={submit}
           style={css`
-          margin: 0.5em;
-        `}
+            margin: 0.5em;
+          `}
         >
           <span>{t("submit")}</span>
         </BaseButton>
       </div>
-      <div style={css`
+      <div
+        style={css`
           display: flex;
           justify-content: center;
           margin: 0.5em;
-        `}>
+        `}
+      >
         {t("login-auth")}
       </div>
-      <FlexFlow style={css`
+      <FlexFlow
+        style={css`
           justify-content: center;
+          align-items: center;
           margin: 0.5em;
-        `}>
+        `}
+      >
         <BaseButton
           onClick={auth}
           style={css`
-          margin: 0.5em;
-        `}
+            margin: 0.5em;
+          `}
         >
           <span>Goup-oauth</span>
         </BaseButton>
       </FlexFlow>
-
     </div>
   );
 }

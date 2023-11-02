@@ -47,7 +47,7 @@ export class AuthPage extends GlobalSTD {
       this.state = JSON.parse(atob(payload));
     }
     fetch(`${origin}/api/user`, {
-      method: "post",
+      method: "get",
       headers: {
         Authorization: "Bearer " + this.token,
       },
