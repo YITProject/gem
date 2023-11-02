@@ -112,6 +112,7 @@ export default function Login() {
         `}
       >
         <BaseButton
+          color="blue"
           onClick={submit}
           style={css`
             margin: 0.5em;
@@ -151,7 +152,7 @@ export default function Login() {
             margin: 0.5em;
           `}
         >
-          <span>Goup-oauth</span>
+          <span>Goup-OAuth</span>
         </BaseButton>
       </FlexFlow>
     </div>

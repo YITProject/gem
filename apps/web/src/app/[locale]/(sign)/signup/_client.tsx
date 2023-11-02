@@ -82,6 +82,7 @@ export default function Signup() {
         </BaseButton>
         <Link href="/login">
           <BaseButton
+            color="blue"
             style={css`
               margin: 0.5em;
             `}
